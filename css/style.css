@@ -91,7 +91,7 @@ nav a:hover {
     background-color: #151515;
     border-top: 1px solid #222;
     border-bottom: 1px solid #222;
-    margin-bottom: 60px; /* HIER WAR DER FEHLER: Das */ /* fehlte! */
+    margin-bottom: 80px; /* HIER WAR DER FEHLER: Das */ /* fehlte! */
 }
 
 .about-content {
@@ -151,17 +151,15 @@ nav a:hover {
     font-size: 16px;
 }
 
-.cta-text {
-    color: #1259f3 !important;
-    font-weight: bold;
-    margin-top: 20px;
-}
-
+/* --- FORMATIERUNG FÜR DAS PROFILBILD --- */
 .about-image {
     flex: 1;
-    max-width: 200px;
+    max-width: 200px; /* Deine gewollte, edle Größe */
     display: flex;
     justify-content: center;
+
+    /* HIER IST DEIN GEWOLLTER EINZUG: */
+    padding-right: 30px; /* Schiebt das Bild symmetrisch nach innen */
 }
 
 .about-image img {
@@ -322,6 +320,16 @@ nav a:hover {
         max-width: 150px;
         margin: 0 auto;
     }
+
+    /* Handy-Anpassung für den Über-Mich Bereich */
+    .about-image {
+        max-width: 150px;
+        margin: 0 auto;
+
+        /* HIER IST DER WICHTIGE HANDY-FIX: */
+        padding-right: 0 !important; /* Padding auf dem Handy deaktivieren */
+    }
+
     /* Zentriert die Liste auf dem Handy, lässt den Text aber linksbündig für bessere Lesbarkeit */
     .about-list {
         display: inline-block;
