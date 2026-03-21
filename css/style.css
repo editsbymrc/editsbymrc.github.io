@@ -120,6 +120,35 @@ nav a:hover {
     line-height: 1.7;
 }
 
+/* --- FORMATIERUNG FÜR DIE STICHPUNKTE --- */
+.about-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.about-list li {
+    color: #aaaaaa;
+    font-size: 15px;
+    line-height: 2;
+}
+
+.about-list strong {
+    color: #ffffff; /* Macht die Schlagworte wie "Name:" schön weiß */
+}
+
+.highlight {
+    color: #1259f3;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.cta-text {
+    color: #1259f3 !important;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
 .about-image {
     flex: 1;
     max-width: 200px;
@@ -284,5 +313,11 @@ nav a:hover {
     .about-image {
         max-width: 150px;
         margin: 0 auto;
+    }
+    /* Zentriert die Liste auf dem Handy, lässt den Text aber linksbündig für bessere Lesbarkeit */
+    .about-list {
+        display: inline-block;
+        text-align: left;
+        margin: 0 auto 20px auto;
     }
 }
