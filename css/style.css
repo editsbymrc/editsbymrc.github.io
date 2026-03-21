@@ -99,6 +99,7 @@ nav a:hover {
     background-color: #151515;
     border-top: 1px solid #222;
     border-bottom: 1px solid #222;
+    margin-bottom: 60px; /* Absatz nach dem Profilbild
 }
 
 .about-content {
