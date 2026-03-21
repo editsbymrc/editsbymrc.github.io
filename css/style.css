@@ -14,11 +14,9 @@ body {
     background-color: #121212;
     color: #ffffff;
     line-height: 1.6;
-    /* Verhindert horizontales Scrollen global (WICHTIG!) */
     overflow-x: hidden;
 }
 
-/* Grundregel: Bilder dürfen NIEMALS breiter sein als ihr Container */
 img {
     max-width: 100%;
     height: auto;
@@ -57,7 +55,7 @@ nav a {
 }
 
 nav a:hover {
-    color: #1259f3; /* Dein kräftiges Blau */
+    color: #1259f3;
 }
 
 /* --- HERO SECTION (Einleitung) --- */
@@ -83,40 +81,34 @@ nav a:hover {
 }
 
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- ÜBER MICH BEREICH (Kompakt & für Logos optimiert) --- */
+/* --- ÜBER MICH BEREICH --- */
 .about-section {
-    padding: 50px 20px; /* Weniger Platz nach oben und unten */
+    padding: 50px 20px;
     background-color: #151515;
     border-top: 1px solid #222;
     border-bottom: 1px solid #222;
-    margin-bottom: 60px; /* Absatz nach dem Profilbild
+    margin-bottom: 60px; /* HIER WAR DER FEHLER: Das */ /* fehlte! */
 }
 
 .about-content {
     display: flex;
     align-items: center;
-    justify-content: center; /* Zentriert alles schön in der Mitte */
-    gap: 40px; /* Weniger Abstand zwischen Text und Logo */
-    max-width: 850px; /* Schmaler, damit es nicht so verloren wirkt */
+    justify-content: center;
+    gap: 40px;
+    max-width: 850px;
     margin: 0 auto;
 }
 
 .about-text {
-    flex: 2; /* Der Text bekommt etwas mehr Platz als das Logo */
+    flex: 2;
 }
 
 .about-text h2 {
-    font-size: 28px; /* Leicht kleinere Überschrift */
+    font-size: 28px;
     margin-bottom: 15px;
     color: #ffffff;
 }
@@ -124,23 +116,60 @@ nav a:hover {
 .about-text p {
     color: #aaaaaa;
     margin-bottom: 15px;
-    font-size: 15px; /* Etwas kompaktere Schrift */
+    font-size: 15px;
     line-height: 1.7;
 }
 
-/* Der Bereich für dein Logo */
 .about-image {
     flex: 1;
-    max-width: 200px; /* HIER IST DER FIX: Logo wird auf edle 200px begrenzt */
+    max-width: 200px;
     display: flex;
     justify-content: center;
-    /* Schatten und Rahmen-Radius entfernt, da Logos das meistens nicht brauchen */
 }
 
 .about-image img {
     width: 100%;
     height: auto;
-    object-fit: contain; /* Sorgt dafür, dass das Logo nicht abgeschnitten wird */
+    object-fit: contain;
+}
+
+/* --- DAS BILDER-GRID (Portfolio) --- */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 50px;
+}
+
+/* --- DER MAGISCHE BILDERSCHUTZ --- */
+.image-protect {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.image-protect:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.image-protect img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: none;
+}
+
+.image-protect .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
 }
 
 /* --- BUTTONS --- */
@@ -160,10 +189,7 @@ nav a:hover {
     cursor: pointer;
 }
 
-.btn-cta:hover {
-    background-color: #0d44c4;
-    transform: translateY(-2px);
-}
+.btn-cta:hover { background-color: #0d44c4; transform: translateY(-2px); }
 
 .btn-cta-small {
     display: inline-block;
@@ -182,10 +208,7 @@ nav a:hover {
     margin-top: 10px;
 }
 
-.btn-cta-small:hover {
-    background-color: #0d44c4;
-    transform: translateY(-2px);
-}
+.btn-cta-small:hover { background-color: #0d44c4; transform: translateY(-2px); }
 
 /* --- POSTER BEREICH --- */
 .poster-grid {
@@ -205,36 +228,18 @@ nav a:hover {
     transition: border-color 0.3s ease;
 }
 
-.poster-item:hover {
-    border-color: #1259f3;
-}
+.poster-item:hover { border-color: #1259f3; }
+.poster-image { margin-bottom: 15px; height: 250px; overflow: hidden; }
+.poster-item h3 { font-size: 18px; margin-bottom: 5px; }
+.poster-price { color: #aaaaaa; font-size: 14px; margin-bottom: 10px; }
 
-.poster-image {
-    margin-bottom: 15px;
-    height: 250px;
-    overflow: hidden;
-}
-
-.poster-item h3 {
-    font-size: 18px;
-    margin-bottom: 5px;
-}
-
-.poster-price {
-    color: #aaaaaa;
-    font-size: 14px;
-    margin-bottom: 10px;
-}
-
-/* --- ENDGÜLTIGER MOBILER FIX (Smartphones & Tablets) --- */
+/* --- ENDGÜLTIGER MOBILER FIX --- */
 @media (max-width: 768px) {
-
     header {
         flex-direction: column;
         padding: 15px;
     }
 
-    /* FIX: Menüpunkte zentriert untereinander, kein Ausbrechen mehr! */
     nav ul {
         flex-direction: column;
         align-items: center;
@@ -244,44 +249,26 @@ nav a:hover {
         margin-top: 15px;
     }
 
-    .hero {
-        padding: 40px 15px;
-    }
+    .hero { padding: 40px 15px; }
+    .hero h2 { font-size: 28px; }
 
-    .hero h2 {
-        font-size: 28px;
-    }
-
-    /* --- DAS BILDER-GRID (Portfolio) --- */
-    .portfolio-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* HIER WAR AUCH EIN FEHLER: Auf dem Handy muss es 1fr sein! */
+    .portfolio-grid, .poster-grid {
+        padding: 15px;
+        grid-template-columns: 1fr; /* Zwingt alles auf 1 Spalte beim Handy */
         gap: 20px;
-        padding: 50px;
     }
 
-    /* --- DER MAGISCHE BILDERSCHUTZ --- */
-    .image-protect {
-        position: relative;
-        overflow: hidden;
-        border-radius: 8px;
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
-    }
+    .about-section { padding: 50px 20px; }
 
-    /* Handy-Anpassung für den Über-Mich Bereich */
-    .about-section {
-        padding: 50px 20px;
-    }
-
-    /* Handy-Anpassung für den Über-Mich Bereich */
     .about-content {
-        flex-direction: column-reverse; /* Clevere Idee: Auf dem Handy Text oben, Logo unten! */
+        flex-direction: column-reverse;
         text-align: center;
         gap: 30px;
     }
 
     .about-image {
-        max-width: 150px; /* Auf dem Handy noch etwas kleiner */
-        margin: 0 auto; /* Schön mittig setzen */
+        max-width: 150px;
+        margin: 0 auto;
     }
 }
