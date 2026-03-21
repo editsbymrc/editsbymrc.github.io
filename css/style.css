@@ -10,6 +10,13 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Grundregel: Bilder dürfen NIEMALS breiter sein als ihr Container */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
 body {
     background-color: #121212; /* Edles, tiefes Dunkelgrau */
     color: #ffffff;
@@ -48,7 +55,7 @@ nav a {
 }
 
 nav a:hover {
-    color: #f39c12; /* Ein schöner Gold/Orange-Akzent beim Hovern */
+    color: #1259f3; /* Ein schönes Blau beim Hovern */
 }
 
 /* --- HERO SECTION (Einleitung) --- */
@@ -130,4 +137,48 @@ nav a:hover {
     height: 100%;
     z-index: 10; /* Liegt ÜBER dem Bild */
     /* Fängt das "lange Drücken" ab, ohne dass das Bild-Menü kommt */
+}
+/* Der blaue Haupt-Button (CTA = Call to Action) */
+.btn-cta {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #1259f3; /* Dein kräftiges Blau */
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-cta:hover {
+    background-color: #0d44c4; /* Etwas dunkleres Blau beim Hovern */
+    transform: translateY(-2px);
+}
+
+/* Kleinerer Anfragen-Button für die Poster */
+.btn-cta-small {
+    display: inline-block;
+    padding: 8px 20px; /* Etwas kleineres Padding als beim Haupt-Button */
+    background-color: #1259f3;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px; /* Etwas kleinere Schrift */
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-cta-small:hover {
+    background-color: #0d44c4;
+    transform: translateY(-2px);
 }
