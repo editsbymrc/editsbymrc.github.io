@@ -10,17 +10,19 @@ html {
     scroll-behavior: smooth;
 }
 
+body {
+    background-color: #121212;
+    color: #ffffff;
+    line-height: 1.6;
+    /* Verhindert horizontales Scrollen global (WICHTIG!) */
+    overflow-x: hidden;
+}
+
 /* Grundregel: Bilder dürfen NIEMALS breiter sein als ihr Container */
 img {
     max-width: 100%;
     height: auto;
     display: block;
-}
-
-body {
-    background-color: #121212; /* Edles, tiefes Dunkelgrau */
-    color: #ffffff;
-    line-height: 1.6;
 }
 
 /* --- NAVIGATION --- */
@@ -55,7 +57,7 @@ nav a {
 }
 
 nav a:hover {
-    color: #1259f3; /* Ein schönes Blau beim Hovern */
+    color: #1259f3; /* Dein kräftiges Blau */
 }
 
 /* --- HERO SECTION (Einleitung) --- */
@@ -91,7 +93,7 @@ nav a:hover {
     }
 }
 
-/* --- DAS BILDER-GRID (Collage) --- */
+/* --- DAS BILDER-GRID (Portfolio) --- */
 .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -103,28 +105,25 @@ nav a:hover {
 .image-protect {
     position: relative;
     overflow: hidden;
-    border-radius: 8px; /* Leicht abgerundete Ecken */
+    border-radius: 8px;
     transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-/* Hover-Effekt: Bild wird beim rüberfahren leicht größer */
 .image-protect:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* Das eigentliche Bild */
 .image-protect img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
 
     /* Verhindert das Markieren des Bildes */
     user-select: none;
     -webkit-user-select: none;
 
-    /* Deaktiviert jegliche Klick/Touch-Events direkt auf das Bild */
+    /* Deaktiviert Klick/Touch-Events auf das Bild */
     pointer-events: none;
 }
 
@@ -135,14 +134,14 @@ nav a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 10; /* Liegt ÜBER dem Bild */
-    /* Fängt das "lange Drücken" ab, ohne dass das Bild-Menü kommt */
+    z-index: 10;
 }
-/* Der blaue Haupt-Button (CTA = Call to Action) */
+
+/* --- BUTTONS --- */
 .btn-cta {
     display: inline-block;
     padding: 12px 30px;
-    background-color: #1259f3; /* Dein kräftiges Blau */
+    background-color: #1259f3;
     color: #ffffff;
     text-decoration: none;
     border-radius: 5px;
@@ -156,21 +155,20 @@ nav a:hover {
 }
 
 .btn-cta:hover {
-    background-color: #0d44c4; /* Etwas dunkleres Blau beim Hovern */
+    background-color: #0d44c4;
     transform: translateY(-2px);
 }
 
-/* Kleinerer Anfragen-Button für die Poster */
 .btn-cta-small {
     display: inline-block;
-    padding: 8px 20px; /* Etwas kleineres Padding als beim Haupt-Button */
+    padding: 8px 20px;
     background-color: #1259f3;
     color: #ffffff;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 12px; /* Etwas kleinere Schrift */
+    font-size: 12px;
     letter-spacing: 1px;
     transition: background-color 0.3s ease, transform 0.2s ease;
     border: none;
@@ -181,4 +179,77 @@ nav a:hover {
 .btn-cta-small:hover {
     background-color: #0d44c4;
     transform: translateY(-2px);
+}
+
+/* --- POSTER BEREICH --- */
+.poster-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.poster-item {
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    transition: border-color 0.3s ease;
+}
+
+.poster-item:hover {
+    border-color: #1259f3;
+}
+
+.poster-image {
+    margin-bottom: 15px;
+    height: 250px;
+    overflow: hidden;
+}
+
+.poster-item h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.poster-price {
+    color: #aaaaaa;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* --- ENDGÜLTIGER MOBILER FIX (Smartphones & Tablets) --- */
+@media (max-width: 768px) {
+
+    header {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    /* FIX: Menüpunkte zentriert untereinander, kein Ausbrechen mehr! */
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        padding: 0;
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .hero {
+        padding: 40px 15px;
+    }
+
+    .hero h2 {
+        font-size: 28px;
+    }
+
+    /* Grids radikal auf 1 Spalte zwingen, Padding reduzieren */
+    .portfolio-grid, .poster-grid {
+        padding: 15px;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
 }
