@@ -311,23 +311,30 @@ nav a:hover {
     .about-section { padding: 50px 20px; }
 
     .about-content {
-        flex-direction: column-reverse;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 60px; /* Schöner, gleichmäßiger Abstand zwischen Text und Bild */
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .about-text {
+        flex: 1; /* Nimmt exakt die linke Hälfte ein */
         text-align: center;
-        gap: 30px;
     }
 
     .about-image {
-        max-width: 150px;
-        margin: 0 auto;
+        flex: 1; /* Nimmt exakt die rechte Hälfte ein */
+        display: flex;
+        justify-content: center; /* Zwingt das Bild perfekt in die Mitte seiner Hälfte */
+        padding: 0; /* Den alten Einzug löschen wir, der stört das Flex-Gleichgewicht! */
     }
 
-    /* Handy-Anpassung für den Über-Mich Bereich */
-    .about-image {
-        max-width: 150px;
-        margin: 0 auto;
-
-        /* HIER IST DER WICHTIGE HANDY-FIX: */
-        padding-right: 0 !important; /* Padding auf dem Handy deaktivieren */
+    .about-image img {
+        max-width: 200px;
+        height: auto;
+        object-fit: contain;
     }
 
     /* Zentriert die Liste auf dem Handy, lässt den Text aber linksbündig für bessere Lesbarkeit */
