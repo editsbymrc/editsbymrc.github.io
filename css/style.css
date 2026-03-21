@@ -91,20 +91,21 @@ nav a:hover {
     background-color: #151515;
     border-top: 1px solid #222;
     border-bottom: 1px solid #222;
-    margin-bottom: 80px; /* HIER WAR DER FEHLER: Das */ /* fehlte! */
+    margin-bottom: 80px;
 }
 
 .about-content {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 40px;
-    max-width: 850px;
+    gap: 60px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
 .about-text {
-    flex: 2;
+    flex: 1;
+    text-align: center;
 }
 
 .about-text h2 {
@@ -121,18 +122,12 @@ nav a:hover {
 }
 
 /* --- FORMATIERUNG FÜR DIE STICHPUNKTE --- */
-.about-text {
-    text-align: center; /* Zentriert die Überschrift und die Absatz-Texte */
-}
-
 .about-list {
     list-style: none;
     padding: 0;
-
-    /* HIER IST DER MAGISCHE FIX: */
-    width: fit-content; /* Macht den Kasten exakt so groß wie den Text */
-    margin: 0 auto 25px auto; /* Schiebt den Kasten perfekt in die Mitte */
-    text-align: left; /* Sorgt dafür, dass Emojis und Text sauber untereinander stehen */
+    width: fit-content;
+    margin: 0 auto 25px auto;
+    text-align: left;
 }
 
 .about-list li {
@@ -151,15 +146,16 @@ nav a:hover {
     font-size: 16px;
 }
 
-/* --- FORMATIERUNG FÜR DAS PROFILBILD --- */
-.about-image {
+/* --- FORMATIERUNG FÜR DAS PROFILBILD (Mit Wrapper!) --- */
+.about-image-wrapper {
     flex: 1;
-    max-width: 200px; /* Deine gewollte, edle Größe */
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Zwingt das Bild perfekt in die Mitte */
+}
 
-    /* HIER IST DEIN GEWOLLTER EINZUG: */
-    padding-right: 30px; /* Schiebt das Bild symmetrisch nach innen */
+.about-image {
+    width: 100%;
+    max-width: 200px;
 }
 
 .about-image img {
@@ -202,9 +198,9 @@ nav a:hover {
     /* Bilder-Schutzmaßnahmen */
     user-select: none;
     -webkit-user-select: none;
-    -webkit-touch-callout: none; /* Blockiert das Apple-Menü direkt auf dem Bild */
-    -webkit-user-drag: none;     /* Verhindert Drag & Drop am PC */
-    pointer-events: none;        /* Macht das Bild für Klicks unsichtbar */
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
 }
 
 /* Der Schutzschild (Overlay) */
@@ -216,7 +212,6 @@ nav a:hover {
     height: 100%;
     z-index: 10;
 
-    /* Der Apple-Hack: Ein zu 99,9% transparentes Element fängt den Touch ab! */
     background-color: rgba(255, 255, 255, 0.001);
     -webkit-touch-callout: none;
 }
@@ -301,46 +296,29 @@ nav a:hover {
     .hero { padding: 40px 15px; }
     .hero h2 { font-size: 28px; }
 
-    /* HIER WAR AUCH EIN FEHLER: Auf dem Handy muss es 1fr sein! */
     .portfolio-grid, .poster-grid {
         padding: 15px;
-        grid-template-columns: 1fr; /* Zwingt alles auf 1 Spalte beim Handy */
+        grid-template-columns: 1fr;
         gap: 20px;
     }
 
     .about-section { padding: 50px 20px; }
 
     .about-content {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 60px; /* Schöner, gleichmäßiger Abstand zwischen Text und Bild */
-        max-width: 900px;
-        margin: 0 auto;
+        flex-direction: column-reverse; /* WICHTIG: Text nach unten, Bild nach oben auf Handy */
+        text-align: center;
+        gap: 30px;
     }
 
-    .about-text {
-        flex: 1; /* Nimmt exakt die linke Hälfte ein */
-        text-align: center;
+    /* Der Wrapper auf dem Handy */
+    .about-image-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
     }
 
     .about-image {
-        flex: 1; /* Nimmt exakt die rechte Hälfte ein */
-        display: flex;
-        justify-content: center; /* Zwingt das Bild perfekt in die Mitte seiner Hälfte */
-        padding: 0; /* Den alten Einzug löschen wir, der stört das Flex-Gleichgewicht! */
-    }
-
-    .about-image img {
-        max-width: 200px;
-        height: auto;
-        object-fit: contain;
-    }
-
-    /* Zentriert die Liste auf dem Handy, lässt den Text aber linksbündig für bessere Lesbarkeit */
-    .about-list {
-        display: inline-block;
-        text-align: left;
-        margin: 0 auto 20px auto;
+        max-width: 150px;
     }
 }
