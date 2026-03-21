@@ -104,8 +104,18 @@ nav a:hover {
 }
 
 .about-text {
-    flex: 1;
+    /* flex: 1; GELÖSCHT */
     text-align: center;
+    width: 100%;
+}
+
+.about-image-wrapper {
+    /* flex: 1; GELÖSCHT */
+    display: flex;
+    justify-content: center;
+    /* HIER IST DER ABSTAND ZUM TEXT UNTERHALB (Überschrift) */
+    margin-bottom: 30px;
+    width: 100%;
 }
 
 .about-text h2 {
@@ -304,20 +314,7 @@ nav a:hover {
 
     .about-section { padding: 50px 20px; }
 
-    .about-content {
-        flex-direction: column-reverse; /* WICHTIG: Text nach unten, Bild nach oben auf Handy */
-        text-align: center;
-        gap: 30px;
-    }
-
-    /* Der Wrapper auf dem Handy */
-    .about-image-wrapper {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        margin-bottom: 20px;
-    }
-
+    /* Handy-Anpassung für den Über-Mich Bereich (CLEAN!) */
     .about-image {
         max-width: 150px;
     }
