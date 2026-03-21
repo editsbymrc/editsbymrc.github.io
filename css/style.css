@@ -121,10 +121,18 @@ nav a:hover {
 }
 
 /* --- FORMATIERUNG FÜR DIE STICHPUNKTE --- */
+.about-text {
+    text-align: center; /* Zentriert die Überschrift und die Absatz-Texte */
+}
+
 .about-list {
     list-style: none;
     padding: 0;
-    margin-bottom: 20px;
+
+    /* HIER IST DER MAGISCHE FIX: */
+    width: fit-content; /* Macht den Kasten exakt so groß wie den Text */
+    margin: 0 auto 25px auto; /* Schiebt den Kasten perfekt in die Mitte */
+    text-align: left; /* Sorgt dafür, dass Emojis und Text sauber untereinander stehen */
 }
 
 .about-list li {
@@ -134,7 +142,7 @@ nav a:hover {
 }
 
 .about-list strong {
-    color: #ffffff; /* Macht die Schlagworte wie "Name:" schön weiß */
+    color: #ffffff;
 }
 
 .highlight {
