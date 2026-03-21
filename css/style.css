@@ -141,12 +141,17 @@ nav a:hover {
     padding: 50px;
 }
 
-/* --- DER MAGISCHE BILDERSCHUTZ --- */
+/* --- DER MAGISCHE BILDERSCHUTZ (Ultra-Safe) --- */
 .image-protect {
     position: relative;
     overflow: hidden;
     border-radius: 8px;
     transition: transform 0.4s ease, box-shadow 0.4s ease;
+
+    /* Blockiert das Kontextmenü (Long Press) auf iOS für den ganzen Container */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .image-protect:hover {
@@ -158,11 +163,16 @@ nav a:hover {
     width: 100%;
     height: 100%;
     object-fit: cover;
+
+    /* Bilder-Schutzmaßnahmen */
     user-select: none;
     -webkit-user-select: none;
-    pointer-events: none;
+    -webkit-touch-callout: none; /* Blockiert das Apple-Menü direkt auf dem Bild */
+    -webkit-user-drag: none;     /* Verhindert Drag & Drop am PC */
+    pointer-events: none;        /* Macht das Bild für Klicks unsichtbar */
 }
 
+/* Der Schutzschild (Overlay) */
 .image-protect .overlay {
     position: absolute;
     top: 0;
@@ -170,6 +180,10 @@ nav a:hover {
     width: 100%;
     height: 100%;
     z-index: 10;
+
+    /* Der Apple-Hack: Ein zu 99,9% transparentes Element fängt den Touch ab! */
+    background-color: rgba(255, 255, 255, 0.001);
+    -webkit-touch-callout: none;
 }
 
 /* --- BUTTONS --- */
