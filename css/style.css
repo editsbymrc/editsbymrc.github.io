@@ -78,6 +78,16 @@ nav a:hover {
 /* --- ANIMATIONEN --- */
 .fade-in {
     animation: fadeInUp 1.2s ease-out forwards;
+    opacity: 0; /* Startet unsichtbar */
+}
+
+/* Neu: Verzögert die Animation beim Über-mich-Bereich um 0.4 Sekunden! */
+.about-section.fade-in {
+    animation-delay: 0.4s;
+}
+
+.portfolio-grid.fade-in {
+    animation-delay: 0.6s; /* Die Bilder laden als drittes! */
 }
 
 @keyframes fadeInUp {
@@ -95,12 +105,9 @@ nav a:hover {
 }
 
 .about-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 60px;
-    max-width: 900px;
-    margin: 0 auto;
+    flex-direction: column; /* HIER WAR DER FEHLER: Das "-reverse" muss weg! */
+    text-align: center;
+    gap: 30px;
 }
 
 .about-text {
