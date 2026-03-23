@@ -290,7 +290,25 @@ nav a:hover {
 }
 
 .poster-item:hover { border-color: #1259f3; }
-.poster-image { margin-bottom: 15px; height: 250px; overflow: hidden; }
+
+/* 1. Das ist der Block, den wir höher gemacht und zentriert haben */
+.poster-image {
+    margin-bottom: 15px;
+    height: 1080px; /* Die neue Höhe */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 2. HIER KOMMT DER NEUE TEIL HIN: Direkt unter .poster-image */
+.poster-image img {
+    object-fit: contain !important; /* Verhindert das Abschneiden */
+    width: auto;
+    height: 100%;
+}
+
+/* Danach geht es normal weiter mit deinen Überschriften */
 .poster-item h3 { font-size: 18px; margin-bottom: 5px; }
 .poster-price { color: #aaaaaa; font-size: 14px; margin-bottom: 10px; }
 
