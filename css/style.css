@@ -494,22 +494,46 @@ footer {
 }
 
 /* --- RESPONSIVE (Mobil) --- */
+/* --- RESPONSIVE (Mobil - Hard Fix) --- */
 @media (max-width: 900px) {
-    .breathing-gallery-section { padding: 0 20px; }
+    /* 1. Navigation: Untereinander statt nebeneinander quetschen */
+    .nav-container {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+    }
+    nav ul { gap: 20px; }
 
-    /* Zick-Zack auf dem Handy deaktivieren, damit nichts gequetscht wird */
+    /* 2. Hero: Abstände verkleinern und Text anpassen */
+    .hero { padding: 140px 20px 60px 20px; }
+    .hero h1 { font-size: 2.2rem; }
+    .hero p { font-size: 1rem; margin-bottom: 30px; }
+
+    /* 3. Galerie: Zick-Zack komplett killen, alles schön stapeln */
+    .breathing-gallery-section { padding: 0 20px; margin-bottom: 80px; }
+    .breathing-container { gap: 30px; }
     .breathe-item {
         align-self: center !important;
         margin: 0 !important;
-        max-width: 100%;
+        width: 100% !important;
+        max-width: 100% !important;
     }
 
+    /* 4. Layouts: Testimonials, Services und Slider sauber untereinander */
     .testimonials-grid, .services-section, .showcase-row {
         grid-template-columns: 1fr;
         flex-direction: column;
+        gap: 20px;
     }
 
-    .hero h1 { font-size: 2.5rem; }
+    .testimonials-section, .services-section, .showcase-section, .about-section {
+        margin: 80px auto; /* Abstände zwischen Sektionen verkleinern */
+    }
+
+    .showcase-slider { width: 100%; margin-top: 30px; }
+    .showcase-text h3 { font-size: 2rem; }
+
+    /* 5. About: Zentrieren */
     .about-section { flex-direction: column; text-align: center; }
-    .showcase-slider { width: 100%; }
+    .about-img-wrapper { margin: 0 auto; }
 }
