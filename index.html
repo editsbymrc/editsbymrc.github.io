@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>editsbymrc. | Premium Auto Shootings</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -34,6 +34,12 @@
     </section>
 
     <section class="wheel-section">
+
+        <div class="mobile-gallery-arrows">
+            <button class="arrow-btn" id="scrollLeft" aria-label="Vorheriges Bild">&#10094;</button>
+            <button class="arrow-btn" id="scrollRight" aria-label="Nächstes Bild">&#10095;</button>
+        </div>
+
         <div class="wheel-sticky">
             <div class="wheel-container" id="scroll-wheel">
                 <div class="wheel-item" style="--i: 0;">
@@ -79,6 +85,7 @@
 
         </div>
     </section>
+
     <section class="testimonials-section">
         <div class="testimonials-container">
             <div class="testimonials-header framer-reveal">
@@ -230,6 +237,7 @@
         }
     });
 </script>
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const wheelSection = document.querySelector('.wheel-section');
@@ -256,6 +264,27 @@
                 const angle = 0 - (progress * 120);
 
                 wheel.style.transform = `rotate(${angle}deg)`;
+            });
+        }
+    });
+</script>
+
+<script>
+    // --- NEU: Mobile Pfeil-Navigation ---
+    document.addEventListener("DOMContentLoaded", function() {
+        const scrollLeftBtn = document.getElementById('scrollLeft');
+        const scrollRightBtn = document.getElementById('scrollRight');
+        const wheelSlider = document.getElementById('scroll-wheel'); // ID passend zu deinem HTML
+
+        if (scrollLeftBtn && scrollRightBtn && wheelSlider) {
+            scrollLeftBtn.addEventListener('click', () => {
+                // Scrollt um die Breite eines Bildes (ca. 85% des Bildschirms) weich nach links
+                wheelSlider.scrollBy({ left: -(window.innerWidth * 0.85), behavior: 'smooth' });
+            });
+
+            scrollRightBtn.addEventListener('click', () => {
+                // Scrollt weich nach rechts
+                wheelSlider.scrollBy({ left: window.innerWidth * 0.85, behavior: 'smooth' });
             });
         }
     });

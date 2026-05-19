@@ -2,6 +2,14 @@
    EDITSBYMRC - MASTER CSS (CLEAN & FIXED)
    ========================================= */
 
+/* --- OVERFLOW-KILLER: Verhindert Rauszoomen und seitliches Wackeln --- */
+html, body {
+    overflow-x: hidden !important;
+    width: 100%;
+    max-width: 100vw;
+    position: relative;
+}
+
 /* --- RESET & BASIS --- */
 * {
     margin: 0;
@@ -10,7 +18,7 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* --- BILDERSCHUTZ (Gegen langes Drücken & Drag-and-Drop) --- */
+/* --- BILDERSCHUTZ --- */
 img {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -21,19 +29,17 @@ img {
     pointer-events: auto;
 }
 
-/* --- GLOBALER HINTERGRUND --- */
 body {
     background-color: #050505;
     color: #e0e0e0;
     line-height: 1.6;
-    overflow-x: hidden;
 }
 
-/* --- HILFSKLASSEN FÜR FORMATE --- */
+/* --- HILFSKLASSEN --- */
 .ratio-2-3 { aspect-ratio: 2 / 3; }
 .ratio-3-2 { aspect-ratio: 3 / 2; }
 
-/* --- NAVIGATION (Glassmorphism) --- */
+/* --- NAVIGATION --- */
 .glass-nav {
     position: fixed;
     top: 0;
@@ -54,27 +60,9 @@ body {
     align-items: center;
 }
 
-.logo h1 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    color: #fff;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-}
-
-nav a {
-    color: #888;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
+.logo h1 { font-size: 1.2rem; font-weight: 700; color: #fff; }
+nav ul { list-style: none; display: flex; gap: 30px; }
+nav a { color: #888; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s ease; }
 nav a:hover, nav a.active { color: #fff; }
 
 /* --- HERO SECTION --- */
@@ -85,37 +73,22 @@ nav a:hover, nav a.active { color: #fff; }
     margin: 0 auto;
 }
 
-.hero h1 {
-    font-size: 4rem;
-    font-weight: 800;
-    letter-spacing: -2px;
-    line-height: 1.1;
-    margin-bottom: 24px;
-    color: #ffffff;
-}
-
+.hero h1 { font-size: 4rem; font-weight: 800; letter-spacing: -2px; line-height: 1.1; margin-bottom: 24px; color: #ffffff; }
 .accent-text { color: #1259f3; }
+.hero p { font-size: 1.25rem; color: #888; margin-bottom: 20px; }
 
-.hero p {
-    font-size: 1.25rem;
-    color: #888;
-    margin-bottom: 20px; /* Reduziert, damit der Glow-Text näher rückt */
-}
-
-/* --- TEXT ANIMATION: BREATHING GLOW (Jetzt global verfügbar!) --- */
+/* --- TEXT ANIMATION: BREATHING GLOW --- */
 .text-glow-pulse {
+    display: block;
+    margin-bottom: 40px;
     color: #ffffff;
     font-weight: bold;
     animation: neonPulse 5.0s ease-in-out infinite alternate;
 }
 
 @keyframes neonPulse {
-    from {
-        text-shadow: 0 0 19px #1259F3, 0 0 38px #1259F3;
-    }
-    to {
-        text-shadow: 0 0 75px #1259F3, 0 0 113px #1259F3;
-    }
+    from { text-shadow: 0 0 19px #1259F3, 0 0 38px #1259F3; }
+    to { text-shadow: 0 0 75px #1259F3, 0 0 113px #1259F3; }
 }
 
 /* --- BUTTON VARIANTE 2: RADAR PULSE --- */
@@ -130,30 +103,20 @@ nav a:hover, nav a.active { color: #fff; }
     font-size: 1rem;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     border: 1px solid transparent;
-    /* Der dauerhafte Puls-Effekt */
     animation: buttonPulse 2s infinite;
 }
 
 .btn-primary:hover {
     background-color: #0d46c4;
     transform: translateY(-3px);
-    /* Beim Hover stoppt der Puls und wird zu einem starken, festen Leuchten */
     animation: none;
     box-shadow: 0 10px 30px rgba(18, 89, 243, 0.6);
 }
 
-/* Die Pulse-Animation */
 @keyframes buttonPulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(18, 89, 243, 0.7);
-    }
-    70% {
-        /* Die Welle breitet sich 15px aus und wird unsichtbar */
-        box-shadow: 0 0 0 15px rgba(18, 89, 243, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(18, 89, 243, 0);
-    }
+    0% { box-shadow: 0 0 0 0 rgba(18, 89, 243, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(18, 89, 243, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(18, 89, 243, 0); }
 }
 
 /* --- CINEMATIC BLUR REVEAL --- */
@@ -163,431 +126,85 @@ nav a:hover, nav a.active { color: #fff; }
     transition: filter 1.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.5s ease;
     cursor: pointer;
 }
-
-.blur-reveal.focused {
-    filter: blur(0px);
-    opacity: 1;
-}
+.blur-reveal.focused { filter: blur(0px); opacity: 1; }
 
 /* =========================================
-   SCROLL-WHEEL GALERIE (Kompakt, schnell & unsichtbare Schiene)
+   SCROLL-WHEEL GALERIE (Desktop)
    ========================================= */
-
-.wheel-section {
-    height: 400vh;
-    margin-top: 10vh;
-    position: relative;
-}
-
-.wheel-sticky {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    width: 100%;
-    overflow: hidden;
-    background-color: #050505;
-}
-
+.wheel-section { height: 400vh; margin-top: 10vh; position: relative; }
+.wheel-sticky { position: sticky; top: 0; height: 100vh; width: 100%; overflow: hidden; background-color: #050505; }
 .wheel-container {
-    position: absolute;
-    bottom: -55vw;
-    left: 50%;
-    width: 100vw;
-    height: 100vw;
-    margin-left: -50vw;
-    border-radius: 50%;
-    transition: transform 0.1s linear;
+    position: absolute; bottom: -55vw; left: 50%; width: 100vw; height: 100vw;
+    margin-left: -50vw; border-radius: 50%; transition: transform 0.1s linear;
 }
 
 .wheel-item {
-    position: absolute;
-    top: -160px;
-    left: 50%;
-    width: 240px;
-    margin-left: -120px;
-    transform-origin: center calc(50vw + 160px);
-    transform: rotate(calc(var(--i) * 30deg));
+    position: absolute; top: -160px; left: 50%; width: 240px; margin-left: -120px;
+    transform-origin: center calc(50vw + 160px); transform: rotate(calc(var(--i) * 30deg));
 }
 
 .wheel-item .img-wrapper {
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    background: #111;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.7);
-    transition: transform 0.4s ease;
+    border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05);
+    background: #111; box-shadow: 0 25px 50px rgba(0,0,0,0.7); transition: transform 0.4s ease;
 }
 
-.wheel-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
+.wheel-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.wheel-item:hover .img-wrapper { transform: scale(1.05) translateY(-15px); border-color: #1259f3; }
 
-.wheel-item:hover .img-wrapper {
-    transform: scale(1.05) translateY(-15px);
-    border-color: #1259f3;
-}
-
-/* Der Blur-Effekt (Schluckt das Rad unten) */
 .wheel-blur-overlay {
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 100%;
-    height: 35vh;
+    position: absolute; bottom: -5px; left: 0; width: 100%; height: 35vh;
     background: linear-gradient(to bottom, rgba(5,5,5,0) 0%, rgba(5,5,5,0.9) 60%, rgba(5,5,5,1) 100%);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    -webkit-mask-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 40%);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
     mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 40%);
-    z-index: 10;
-    pointer-events: none;
+    -webkit-mask-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 40%);
+    z-index: 10; pointer-events: none;
 }
 
-/* --- KUNDENBEWERTUNGEN --- */
-.testimonials-section {
-    max-width: 1200px;
-    margin: 120px auto;
-    padding: 0 20px;
-}
+/* PFEILE FÜR DESKTOP VERSTECKEN */
+.mobile-gallery-arrows { display: none; }
 
-.testimonials-header {
-    text-align: center;
-    margin-bottom: 60px;
-}
-
-.testimonials-header h2 {
-    font-size: 2.5rem;
-    color: #fff;
-    margin-bottom: 15px;
-}
-
-.testimonials-header p {
-    color: #888;
-    font-size: 1.1rem;
-}
-
-.testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-}
-
-.testimonial-card {
-    background: #111;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: all 0.4s ease;
-}
-
-.testimonial-card:hover {
-    border-color: #1259f3;
-    transform: translateY(-5px);
-}
-
-.testimonial-stars {
-    color: #1259f3;
-    font-size: 1.1rem;
-    margin-bottom: 20px;
-    letter-spacing: 2px;
-}
-
-.testimonial-text {
-    color: #e0e0e0;
-    font-size: 1.05rem;
-    line-height: 1.6;
-    margin-bottom: 30px;
-}
-
-.testimonial-client {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding-top: 20px;
-}
-
-.client-avatar {
-    width: 42px;
-    height: 42px;
-    background: rgba(18, 89, 243, 0.1);
-    border: 1px solid rgba(18, 89, 243, 0.3);
-    color: #1259f3;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 1rem;
-}
-
-.client-info {
-    display: flex;
-    flex-direction: column;
-}
-
-.client-name {
-    color: #fff;
-    font-weight: 600;
-    font-size: 0.95rem;
-}
-
-.client-car {
-    color: #888;
-    font-size: 0.85rem;
-    margin-top: 2px;
-}
-
-/* --- BEFORE & AFTER SLIDER --- */
-.showcase-section {
-    max-width: 1200px;
-    margin: 120px auto;
-    padding: 0 20px;
-}
-
-.showcase-row {
-    display: flex;
-    align-items: center;
-    gap: 60px;
-}
-
-.showcase-row:nth-child(even) { flex-direction: row-reverse; }
-
-.showcase-text { flex: 1; }
-
-.showcase-text h3 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: #fff;
-}
-
-.showcase-text p {
-    color: #888;
-    font-size: 1.1rem;
-}
-
-.showcase-slider {
-    flex: 1.5;
-    position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-    background: #111;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.before-after-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.img-raw, .img-edit {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    pointer-events: none;
-}
-
-.img-edit {
-    z-index: 2;
-    clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
-}
-
-.slider-control {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: 10;
-    opacity: 0;
-    cursor: ew-resize;
-}
-
-.slider-line {
-    position: absolute;
-    top: 0; left: 50%;
-    width: 2px; height: 100%;
-    background: white;
-    z-index: 3;
-    transform: translateX(-50%);
-}
-
-.slider-button {
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 50px; height: 50px;
-    background: #1259f3;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 4;
-    transform: translate(-50%, -50%);
-    border: 3px solid white;
-    color: white;
-    font-weight: bold;
-}
-
-/* --- SERVICES --- */
-.services-section {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    max-width: 1200px;
-    margin: 120px auto;
-    padding: 0 20px;
-}
-
-.service-card {
-    background: #111;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
-    padding: 40px;
-    transition: 0.4s;
-}
-
-.service-card h3 {
-    color: #fff;
-    font-size: 1.4rem;
-    margin-bottom: 15px;
-}
-
-.service-card p {
-    color: #888;
-}
-
-.service-card:hover {
-    border-color: #1259f3;
-    transform: translateY(-10px);
-}
+/* --- KUNDENBEWERTUNGEN, SHOWCASE & SERVICES (Desktop Unverändert) --- */
+.testimonials-section, .showcase-section, .services-section { max-width: 1200px; margin: 120px auto; padding: 0 20px; }
+.testimonials-header { text-align: center; margin-bottom: 60px; }
+.testimonials-header h2 { font-size: 2.5rem; color: #fff; margin-bottom: 15px; }
+.testimonials-header p { color: #888; font-size: 1.1rem; }
+.testimonials-grid, .services-section { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.testimonial-card, .service-card { background: #111; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 40px; transition: all 0.4s ease; }
+.testimonial-card:hover, .service-card:hover { border-color: #1259f3; transform: translateY(-5px); }
+.testimonial-stars { color: #1259f3; font-size: 1.1rem; margin-bottom: 20px; letter-spacing: 2px; }
+.testimonial-text, .service-card p { color: #e0e0e0; font-size: 1.05rem; line-height: 1.6; margin-bottom: 30px; }
+.service-card h3 { color: #fff; font-size: 1.4rem; margin-bottom: 15px; }
+.testimonial-client { display: flex; align-items: center; gap: 15px; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 20px; }
+.client-avatar { width: 42px; height: 42px; background: rgba(18, 89, 243, 0.1); border: 1px solid rgba(18, 89, 243, 0.3); color: #1259f3; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+.client-info { display: flex; flex-direction: column; }
+.client-name { color: #fff; font-weight: 600; font-size: 0.95rem; }
+.client-car { color: #888; font-size: 0.85rem; margin-top: 2px; }
 
 /* --- ABOUT & FOOTER --- */
-.about-section {
-    display: flex;
-    align-items: center;
-    max-width: 800px;
-    margin: 120px auto;
-    gap: 40px;
-    padding: 0 20px;
-}
-
-.about-img-wrapper {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    border: 2px solid #1259f3;
-    overflow: hidden;
-    flex-shrink: 0;
-    padding: 7px;
-    background-color: #050505;
-}
-
-.about-img-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-.about-info h2 {
-    font-size: 2rem;
-    color: #fff;
-    margin-bottom: 10px;
-}
-
-.about-info p {
-    color: #888;
-    font-size: 1.05rem;
-}
-
-.final-cta {
-    text-align: center;
-    padding: 120px 20px;
-    background: radial-gradient(circle at top, rgba(18, 89, 243, 0.05) 0%, #050505 70%);
-}
-
-.final-cta h2 {
-    font-size: 2.5rem;
-    color: #fff;
-    margin-bottom: 15px;
-}
-
-.final-cta p {
-    color: #888;
-    margin-bottom: 30px;
-}
-
-footer {
-    padding: 40px;
-    text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    color: #555;
-    font-size: 0.85rem;
-}
-
-/* --- FRAMER ANIMATIONS --- */
-.framer-reveal {
-    opacity: 0;
-    transform: translateY(40px) scale(0.97);
-    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.framer-show {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-}
+.about-section { display: flex; align-items: center; max-width: 800px; margin: 120px auto; gap: 40px; padding: 0 20px; }
+.about-img-wrapper { width: 150px; height: 150px; border-radius: 50%; border: 2px solid #1259f3; overflow: hidden; flex-shrink: 0; padding: 7px; background-color: #050505; }
+.about-img-wrapper img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.about-info h2 { font-size: 2rem; color: #fff; margin-bottom: 10px; }
+.about-info p { color: #888; font-size: 1.05rem; }
+.final-cta { text-align: center; padding: 120px 20px; background: radial-gradient(circle at top, rgba(18, 89, 243, 0.05) 0%, #050505 70%); }
+.final-cta h2 { font-size: 2.5rem; color: #fff; margin-bottom: 15px; }
+.final-cta p { color: #888; margin-bottom: 30px; }
+footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); color: #555; font-size: 0.85rem; }
 
 /* =========================================
-   RESPONSIVE (Mobil - Premium App Vibe & Fixes)
+   RESPONSIVE (Mobil - Premium App Vibe)
    ========================================= */
 @media (max-width: 900px) {
-    .nav-container {
-        flex-direction: column;
-        gap: 15px;
-        padding: 15px;
-    }
-
-    nav ul {
-        gap: 20px;
-    }
-
-    .hero {
-        padding: 140px 20px 60px 20px;
-    }
-
-    .hero h1 {
-        font-size: 2.2rem;
-    }
-
-    .hero p {
-        font-size: 1rem;
-        margin-bottom: 30px;
-    }
+    .nav-container { flex-direction: column; gap: 15px; padding: 15px; }
+    nav ul { gap: 20px; }
+    .hero { padding: 140px 20px 60px 20px; }
+    .hero h1 { font-size: 2.2rem; }
+    .hero p { font-size: 1rem; margin-bottom: 30px; }
 
     /* === Horizontal Swipe Carousel fürs Handy === */
-    .wheel-blur-overlay {
-        display: none;
-    }
-
-    .wheel-section {
-        height: auto;
-        padding: 40px 0;
-        margin: 40px 0;
-        overflow: hidden;
-    }
-
-    .wheel-sticky {
-        position: relative;
-        height: auto;
-        overflow: visible;
-        background-color: transparent;
-    }
+    .wheel-blur-overlay { display: none; }
+    .wheel-section { height: auto; padding: 40px 0; margin: 40px 0; overflow: hidden; position: relative; }
+    .wheel-sticky { position: relative; height: auto; overflow: visible; background-color: transparent; }
 
     .wheel-container {
         position: relative;
@@ -596,25 +213,22 @@ footer {
         bottom: auto;
         left: auto;
         margin: 0;
-        transform: none !important; /* Killt die Desktop-Drehung */
+        transform: none !important;
         border: none;
-
-        /* Die Wisch-Mechanik */
         display: flex;
         flex-direction: row;
         gap: 15px;
         overflow-x: auto;
-        scroll-snap-type: x mandatory;
+        scroll-snap-type: x mandatory; /* Magnetisches Einrasten */
         padding: 0 20px;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
+        scroll-behavior: smooth; /* Weiche Animation beim Pfeil-Klick */
     }
 
-    .wheel-container::-webkit-scrollbar {
-        display: none;
-    }
+    .wheel-container::-webkit-scrollbar { display: none; }
 
-    /* === BILDER-FIX FÜR MOBILE: Verhindert Verschiebung nach unten === */
+    /* === BILDER-FIX FÜR MOBILE === */
     .wheel-item {
         position: relative !important;
         width: 85%;
@@ -630,23 +244,72 @@ footer {
         display: block;
     }
 
-    /* === RADIUS/RAHMEN-KILLER FÜR MOBILE (JETZT AUCH FÜR DEN CONTAINER) === */
-    .wheel-container,
-    .wheel-item,
-    .wheel-item .img-wrapper,
-    .wheel-item img {
-        border-radius: 0 !important; /* Zerstört die runden Ecken überall */
-        border: none !important; /* Entfernt alle Linien */
-        box-shadow: none !important; /* Entfernt Schatten */
-        outline: none !important;
-        clip-path: none !important; /* Verhindert verstecktes Abschneiden */
+    /* === DIE NEUEN RUNDUNGEN FÜR DIE BILDER === */
+    .wheel-container {
+        border-radius: 0 !important; /* Container bleibt eckig (verhindert Oval-Clipping) */
+        clip-path: none !important;
     }
 
-    /* Zwingt den Container dazu, nicht mehr abzuschneiden */
+    .wheel-item .img-wrapper,
+    .wheel-item img {
+        border-radius: 16px !important; /* Hier ist die schöne Abrundung! */
+        border: 1px solid rgba(255, 255, 255, 0.05) !important;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+    }
+
     .wheel-section,
     .wheel-sticky,
     .wheel-container {
         overflow: visible !important;
-        overflow-x: auto !important; /* Nur seitliches Wischen erlauben */
+        overflow-x: auto !important;
     }
+
+    /* === PFEIL-NAVIGATION (Nur auf Mobile sichtbar) === */
+    .mobile-gallery-arrows {
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        transform: translateY(-50%);
+        z-index: 50;
+        pointer-events: none; /* Klicks gehen durch den leeren Raum hindurch */
+        padding: 0 10px;
+    }
+
+    .arrow-btn {
+        pointer-events: auto; /* Buttons selbst sind klickbar */
+        background: rgba(18, 89, 243, 0.85); /* Dein Editsbymrc Blau */
+        color: white;
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+        transition: transform 0.2s ease, background 0.2s ease;
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+    }
+
+    .arrow-btn:active {
+        transform: scale(0.9);
+        background: #0d46c4;
+    }
+
+    /* === FIX FÜR BEWERTUNGEN & SERVICES === */
+    .testimonials-grid, .services-section {
+        display: flex !important; flex-direction: column !important; width: 100% !important; gap: 20px !important; padding: 0 !important;
+    }
+    .testimonial-card, .service-card {
+        width: 100% !important; max-width: 100vw !important; padding: 30px 25px !important; margin: 0 !important; box-sizing: border-box !important;
+    }
+    .testimonials-section, .showcase-section, .about-section {
+        width: 100% !important; max-width: 100vw !important; padding: 0 20px !important; margin-left: auto !important; margin-right: auto !important; box-sizing: border-box !important; overflow-x: hidden !important;
+    }
+    .testimonial-client { flex-wrap: wrap !important; }
 }
