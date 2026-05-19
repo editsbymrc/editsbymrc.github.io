@@ -10,6 +10,17 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
+/* --- BILDERSCHUTZ (Gegen langes Drücken & Drag-and-Drop) --- */
+img {
+    -webkit-touch-callout: none; /* Verhindert das Menü beim langen Drücken (iOS/Safari) */
+    -webkit-user-select: none;   /* Verhindert das Markieren (Safari) */
+    -moz-user-select: none;      /* Verhindert das Markieren (Firefox) */
+    -ms-user-select: none;       /* Verhindert das Markieren (Edge) */
+    user-select: none;           /* Standard für moderne Browser */
+    -webkit-user-drag: none;     /* Verhindert das Rausziehen auf den Desktop */
+    pointer-events: auto;
+}
+
 /* --- GLOBALER HINTERGRUND (Schlicht & Elegant) --- */
 body {
     background-color: #050505; /* Ein pures, tiefes Schwarz ohne Schnickschnack */
