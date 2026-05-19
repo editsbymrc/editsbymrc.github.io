@@ -3,78 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>editsbymrc | Portfolio</title>
+    <title>editsbymrc. | Premium Auto Shootings</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const blurText = document.querySelector('.blur-reveal');
+
+        if (blurText) {
+            // Die Funktion, die den Text dauerhaft scharf macht
+            const makeSharp = () => {
+                blurText.classList.add('focused');
+            };
+
+            // Reagiert auf Maus-drüberfahren (PC) und Antippen (Handy)
+            blurText.addEventListener('mouseenter', makeSharp, { once: true });
+            blurText.addEventListener('touchstart', makeSharp, { once: true });
+        }
+    });
+</script>
+
 <body>
-<header>
-    <div class="logo">
-        <h1>editsbymrc.</h1>
+
+<!-- Glassmorphism Navigation -->
+<header class="glass-nav">
+    <div class="nav-container">
+        <div class="logo">
+            <h1>editsbymrc.</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">Portfolio</a></li>
+                <li><a href="galerie.html">Mein Shooting</a></li>
+            </ul>
+        </nav>
     </div>
-    <nav>
-        <ul>
-            <li><a href="index.html">Portfolio</a></li>
-            <li><a href="galerie.html">Mein Shooting</a></li>
-        </ul>
-    </nav>
 </header>
 
 <main>
-    <section class="hero fade-in">
-        <h2>Auto Shootings auf dem nächsten Level</h2>
-        <p>Dynamik, Details und pure Kreativität.</p>
+    <!-- 1. Hero Section (Die war in deinem Entwurf oben weggefallen) -->
+    <section class="hero framer-reveal">
+        <h1 class="blur-reveal">Auto Shootings auf dem <span class="accent-text">nächsten Level.</span></h1>
+        <p>Dynamik, Details und pure Kreativität. Aus dem Sucher, direkt auf deinen Screen.</p>
+        <div class="hero-buttons">
+            <a href="mailto:hasanmeric2204@gmail.com" class="btn-primary">Jetzt Shooting anfragen</a>
+        </div>
     </section>
 
-    <section class="about-section fade-in">
-        <div class="about-content">
-
-            <div class="about-image-wrapper">
-                <div class="about-image image-protect">
-                    <img src="assets/img/IMG_8461.jpg" alt="Hasan Profilbild">
-                    <div class="overlay"></div>
+    <!-- 2. Die verteilte "Breathing" Galerie -->
+    <section class="breathing-gallery-section">
+        <div class="breathing-container">
+            <div class="breathe-item delay-1 framer-reveal">
+                <div class="img-wrapper ratio-2-3">
+                    <img src="assets/img/DSC01147.jpg" alt="Highlight 1">
                 </div>
             </div>
+            <div class="breathe-item delay-2 framer-reveal">
+                <div class="img-wrapper ratio-2-3">
+                    <img src="assets/img/E38_Final.jpg" alt="Detail 1">
+                </div>
+            </div>
+            <div class="breathe-item delay-3 framer-reveal">
+                <div class="img-wrapper ratio-2-3">
+                    <img src="assets/img/DSC02027%20Kopie.jpg" alt="Dynamik 1">
+                </div>
+            </div>
+            <div class="breathe-item delay-4 framer-reveal">
+                <div class="img-wrapper ratio-2-3">
+                    <img src="assets/img/DSC02696%20Kopie.jpg" alt="Location 1">
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <div class="about-text">
-                <h2>Der Typ hinter der Kamera 👋</h2>
+    <section class="testimonials-section">
+        <div class="testimonials-container">
 
-                <ul class="about-list">
-                    <li>👤 Hasan (21)</li>
-                    <li>📍 Marburg-Biedenkopf</li>
-                    <li>🎓 Wirtschaftsinformatik Student</li>
-                    <li>📸 Automobilfotografie & Visual Arts</li>
-                </ul>
-
-                <a href="mailto:hasanmeric2204@gmail.com" class="btn-cta" style="margin-top: 40px; margin-bottom: 30px; display: inline-block;">
-                    Lass uns dein Auto in Szene setzen
-                </a>
+            <div class="testimonials-header framer-reveal">
+                <h2>Was Kunden <span class="accent-text">sagen.</span></h2>
+                <p>Echte Meinungen nach dem Shooting.</p>
             </div>
 
-        </div>
+            <div class="testimonials-grid">
 
+                <div class="testimonial-card framer-reveal">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Hasan hat ein unfassbares Auge für Linien und Licht. Mein C-Coupe sah noch nie so brutal aus. Absolut professionell und die Bilder kamen extrem schnell!"</p>
+                    <div class="testimonial-client">
+                        <div class="client-avatar">TY</div>
+                        <div class="client-info">
+                            <span class="client-car">Mercedes-Benz C250 Coupe</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card framer-reveal" style="transition-delay: 0.1s;">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Die Atmosphäre beim Shooting war total entspannt. Er weiß genau, wie er die Dynamik auf der Straße einfängt."</p>
+                    <div class="testimonial-client">
+                        <div class="client-avatar">AK</div>
+                        <div class="client-info">
+                            <span class="client-car">BMW E60</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card framer-reveal" style="transition-delay: 0.2s;">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Von der Location-Suche bis zum fertigen Color Grading absolut top. Man merkt einfach die Leidenschaft für Autos in jedem einzelnen Detail."</p>
+                    <div class="testimonial-client">
+                        <div class="client-avatar">BD</div>
+                        <div class="client-info">
+                            <span class="client-car">Mercedes-Benz 320</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </section>
-    <section class="portfolio-grid fade-in">
-        <div class="image-protect">
-            <img src="assets/img/DSC01147.jpg" alt="Portfolio Bild 1">
-            <div class="overlay"></div>
+
+    <!-- 4. Der Before/After Slider -->
+    <section class="showcase-section">
+        <div class="showcase-container">
+            <div class="showcase-row framer-reveal">
+                <div class="showcase-text">
+                    <h3>Die Ästhetik der Nachbearbeitung</h3>
+                    <p>Ein Foto direkt aus der Kamera ist für mich nur das Rohmaterial. Durch präzises Color Grading, gezieltes Dodge & Burn und die Akzentuierung von Lichtkanten verleihe ich jedem Fahrzeug eine visuelle Tiefe, die über die Realität hinausgeht.</p>
+                </div>
+                <div class="showcase-slider ratio-2-3">
+                    <div class="before-after-wrapper">
+                        <img src="assets/img/W123_RAW.jpg" alt="Vorher RAW" class="img-raw">
+                        <img src="assets/img/W123_Final.jpg" alt="Nachher Bearbeitet" class="img-edit">
+                        <input type="range" min="0" max="100" value="50" class="slider-control">
+                        <div class="slider-line"></div>
+                        <div class="slider-button">↔</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="image-protect">
-            <img src="assets/img/DSC01157.jpg" alt="Portfolio Bild 2">
-            <div class="overlay"></div>
+    </section>
+
+    <!-- 4. Services Section -->
+    <section class="services-section">
+        <div class="service-card framer-reveal">
+            <h3>Dynamik</h3>
+            <p>Ich fange den perfekten Winkel deines Autos ein. Kein langweiliges Parken, sondern pure Energie auf der Straße.</p>
         </div>
-        <div class="image-protect">
-            <img src="assets/img/DSC01151.jpg" alt="Portfolio Bild 3">
-            <div class="overlay"></div>
+        <div class="service-card framer-reveal">
+            <h3>Details</h3>
+            <p>Jede Kurve, jede Naht im Interieur, jede Felge in Perfektion ausgeleuchtet, Kratzer entfernt und in Szene gesetzt.</p>
         </div>
-        <div class="image-protect">
-            <img src="assets/img/DSC01031.jpg" alt="Portfolio Bild 4">
-            <div class="overlay"></div>
+        <div class="service-card framer-reveal">
+            <h3>Kreativität</h3>
+            <p>Dein Auto in Locations, die den Charakter deines Fahrzeugs unterstreichen und herausstechen.</p>
         </div>
+    </section>
+
+    <!-- 5. About Section -->
+    <section class="about-section framer-reveal">
+        <div class="about-img-wrapper">
+            <!-- Denk dran, hier später dein echtes Bild einzusetzen -->
+            <img src="assets/img/FullSizeRender.jpg" alt="Hasan Profil" style="background-color: #1a1a1a;">
+        </div>
+        <div class="about-info">
+            <h2>Hasan 👋</h2>
+            <p>Der Typ hinter der Kamera aus Marburg-Biedenkopf. Wirtschaftsinformatik-Student mit einer obsessiven Leidenschaft für Automobilfotografie & Visual Arts. Ich lasse Bilder sprechen.</p>
+        </div>
+    </section>
+
+    <!-- 6. Final CTA -->
+    <section class="final-cta framer-reveal">
+        <h2>Bereit für dein eigenes Shooting?</h2>
+        <p>Lass uns besprechen, wie wir dein Fahrzeug perfekt einfangen.</p>
+        <a href="mailto:hasanmeric2204@gmail.com" class="btn-primary">Schreibe mir eine Nachricht</a>
     </section>
 </main>
 
 <footer>
     <p>&copy; 2026 editsbymrc. Alle Rechte vorbehalten.</p>
 </footer>
+
+<!-- SCRIPTS -->
+
+<!-- Framer Smooth Scroll & Reveal Script -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('framer-show');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+        document.querySelectorAll('.framer-reveal').forEach((el) => {
+            observer.observe(el);
+        });
+    });
+</script>
+
+<!-- Before/After Slider Script -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const sliders = document.querySelectorAll('.before-after-wrapper');
+
+        sliders.forEach(wrapper => {
+            const sliderControl = wrapper.querySelector('.slider-control');
+            const imgEdit = wrapper.querySelector('.img-edit');
+            const line = wrapper.querySelector('.slider-line');
+            const button = wrapper.querySelector('.slider-button');
+
+            sliderControl.addEventListener('input', (e) => {
+                const sliderValue = e.target.value;
+                imgEdit.style.clipPath = `polygon(0 0, ${sliderValue}% 0, ${sliderValue}% 100%, 0 100%)`;
+                line.style.left = `${sliderValue}%`;
+                button.style.left = `${sliderValue}%`;
+            });
+        });
+    });
+</script>
+
 </body>
 </html>
