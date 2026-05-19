@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>editsbymrc. | Premium Auto Shootings</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=2.0">
 </head>
 
 <body oncontextmenu="return false;">
@@ -132,7 +132,7 @@
             <div class="showcase-row framer-reveal">
                 <div class="showcase-text">
                     <h3>Vom RAW zum Edit.</h3>
-                    <p>Ein rohes Bild aus der Kamera ist für mich erst der halbe Job. Erst in der Post-Production entsteht der echte Look. Gezieltes Color Grading, Kontraste und Lichtkanten, die die Linienführung des Autos richtig betonen.</p>
+                    <p>Ein einfaches Bild aus der Kamera ist für mich erst der halbe Job. Erst in der Post-Production entsteht der echte Look. Gezieltes Color Grading, Kontraste und Lichtkanten, die die Linienführung des Autos richtig betonen.</p>
                 </div>
                 <div class="showcase-slider ratio-2-3">
                     <div class="before-after-wrapper">
@@ -164,7 +164,7 @@
 
     <section class="about-section framer-reveal">
         <div class="about-img-wrapper">
-            <img src="assets/img/FullSizeRender.jpg" alt="Hasan Profil" style="background-color: #1a1a1a;">
+            <img src="assets/img/FullSizeRender.JPG" alt="Hasan Profil" style="background-color: #1a1a1a;">
         </div>
         <div class="about-info">
             <h2>Hey, ich bin Hasan. 👋</h2>
@@ -225,12 +225,10 @@
         const blurText = document.querySelector('.blur-reveal');
 
         if (blurText) {
-            // Die Funktion, die den Text scharf macht
             const makeSharp = () => {
                 blurText.classList.add('focused');
             };
 
-            // Hört auf die GESAMTE Seite: Mausbewegung, Scrollen oder Tippen
             window.addEventListener('mousemove', makeSharp, { once: true });
             window.addEventListener('touchstart', makeSharp, { once: true });
             window.addEventListener('scroll', makeSharp, { once: true });
@@ -248,19 +246,12 @@
                 const rect = wheelSection.getBoundingClientRect();
                 const viewHeight = window.innerHeight;
 
-                // NEU: Der Vorlauf! Das Drehen startet, sobald die Sektion zur Hälfte im Bild ist
                 const startOffset = viewHeight * 0.5;
-
-                // Die totale Distanz: Der Vorlauf + die Klebezeit bis zum Ende
                 const totalScroll = rect.height - viewHeight + startOffset;
 
-                // Fortschritt: Wie weit sind wir seit dem Startpunkt gescrollt?
                 let progress = (startOffset - rect.top) / totalScroll;
-
-                // Zwingt den Wert strikt zwischen 0 (Start) und 1 (Ende)
                 progress = Math.max(0, Math.min(1, progress));
 
-                // Der Winkel: Von +60 Grad zu -60 Grad
                 const angle = 0 - (progress * 120);
 
                 wheel.style.transform = `rotate(${angle}deg)`;
@@ -270,20 +261,17 @@
 </script>
 
 <script>
-    // --- NEU: Mobile Pfeil-Navigation ---
     document.addEventListener("DOMContentLoaded", function() {
         const scrollLeftBtn = document.getElementById('scrollLeft');
         const scrollRightBtn = document.getElementById('scrollRight');
-        const wheelSlider = document.getElementById('scroll-wheel'); // ID passend zu deinem HTML
+        const wheelSlider = document.getElementById('scroll-wheel');
 
         if (scrollLeftBtn && scrollRightBtn && wheelSlider) {
             scrollLeftBtn.addEventListener('click', () => {
-                // Scrollt um die Breite eines Bildes (ca. 85% des Bildschirms) weich nach links
                 wheelSlider.scrollBy({ left: -(window.innerWidth * 0.85), behavior: 'smooth' });
             });
 
             scrollRightBtn.addEventListener('click', () => {
-                // Scrollt weich nach rechts
                 wheelSlider.scrollBy({ left: window.innerWidth * 0.85, behavior: 'smooth' });
             });
         }
