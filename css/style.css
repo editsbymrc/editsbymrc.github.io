@@ -104,25 +104,17 @@ nav a:hover, nav a.active { color: #fff; }
 
 /* --- TEXT ANIMATION: BREATHING GLOW (Jetzt global verfügbar!) --- */
 .text-glow-pulse {
-    display: block;         /* WICHTIG: Macht den Text zu einem eigenständigen Block */
-    margin-bottom: 40px;    /* WICHTIG: Das ist dein Abstand zum Button! */
-    color: #e0e0e0;
-    font-weight: 600;
-    font-size: 1.1rem;
-    animation: neonPulse 3s ease-in-out infinite alternate;
+    color: #ffffff;
+    font-weight: bold;
+    animation: neonPulse 5.0s ease-in-out infinite alternate;
 }
 
 @keyframes neonPulse {
-    0% {
-        text-shadow: 0 0 5px rgba(18, 89, 243, 0.3),
-        0 0 10px rgba(18, 89, 243, 0.1);
-        color: #ffffff;
+    from {
+        text-shadow: 0 0 19px #1259F3, 0 0 38px #1259F3;
     }
-    100% {
-        text-shadow: 0 0 10px rgba(18, 89, 243, 0.9),
-        0 0 20px rgba(18, 89, 243, 0.7),
-        0 0 40px rgba(18, 89, 243, 0.5);
-        color: #e0e0e0;
+    to {
+        text-shadow: 0 0 75px #1259F3, 0 0 113px #1259F3;
     }
 }
 
@@ -560,16 +552,42 @@ footer {
         gap: 15px;
         padding: 15px;
     }
-    nav ul { gap: 20px; }
 
-    .hero { padding: 140px 20px 60px 20px; }
-    .hero h1 { font-size: 2.2rem; }
-    .hero p { font-size: 1rem; margin-bottom: 30px; }
+    nav ul {
+        gap: 20px;
+    }
+
+    .hero {
+        padding: 140px 20px 60px 20px;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
 
     /* === Horizontal Swipe Carousel fürs Handy === */
-    .wheel-blur-overlay { display: none; }
-    .wheel-section { height: auto; padding: 40px 0; margin: 40px 0; overflow: hidden; }
-    .wheel-sticky { position: relative; height: auto; overflow: visible; background-color: transparent; }
+    .wheel-blur-overlay {
+        display: none;
+    }
+
+    .wheel-section {
+        height: auto;
+        padding: 40px 0;
+        margin: 40px 0;
+        overflow: hidden;
+    }
+
+    .wheel-sticky {
+        position: relative;
+        height: auto;
+        overflow: visible;
+        background-color: transparent;
+    }
 
     .wheel-container {
         position: relative;
@@ -592,7 +610,9 @@ footer {
         scrollbar-width: none;
     }
 
-    .wheel-container::-webkit-scrollbar { display: none; }
+    .wheel-container::-webkit-scrollbar {
+        display: none;
+    }
 
     /* === BILDER-FIX FÜR MOBILE: Verhindert Verschiebung nach unten === */
     .wheel-item {
@@ -610,31 +630,23 @@ footer {
         display: block;
     }
 
-    /* === RADIUS/RAHMEN-KILLER FÜR MOBILE === */
+    /* === RADIUS/RAHMEN-KILLER FÜR MOBILE (JETZT AUCH FÜR DEN CONTAINER) === */
+    .wheel-container,
     .wheel-item,
     .wheel-item .img-wrapper,
     .wheel-item img {
-        border-radius: 0 !important;
-        border: none !important;
-        box-shadow: none !important;
+        border-radius: 0 !important; /* Zerstört die runden Ecken überall */
+        border: none !important; /* Entfernt alle Linien */
+        box-shadow: none !important; /* Entfernt Schatten */
         outline: none !important;
+        clip-path: none !important; /* Verhindert verstecktes Abschneiden */
     }
 
-    /* Restliches Mobile-Layout (unverändert) */
-    .testimonials-grid, .services-section, .showcase-row {
-        grid-template-columns: 1fr;
-        flex-direction: column;
-        gap: 20px;
+    /* Zwingt den Container dazu, nicht mehr abzuschneiden */
+    .wheel-section,
+    .wheel-sticky,
+    .wheel-container {
+        overflow: visible !important;
+        overflow-x: auto !important; /* Nur seitliches Wischen erlauben */
     }
-
-    .testimonials-section, .services-section, .showcase-section, .about-section {
-        margin: 80px auto;
-        padding: 0 20px;
-    }
-
-    .showcase-slider { width: 100%; margin-top: 30px; }
-    .showcase-text h3 { font-size: 2rem; }
-
-    .about-section { flex-direction: column; text-align: center; }
-    .about-img-wrapper { margin: 0 auto; }
 }
