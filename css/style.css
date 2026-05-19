@@ -99,9 +99,34 @@ nav a:hover, nav a.active { color: #fff; }
 .hero p {
     font-size: 1.25rem;
     color: #888;
-    margin-bottom: 40px;
+    margin-bottom: 20px; /* Reduziert, damit der Glow-Text näher rückt */
 }
 
+/* --- TEXT ANIMATION: BREATHING GLOW (Jetzt global verfügbar!) --- */
+.text-glow-pulse {
+    display: block;         /* WICHTIG: Macht den Text zu einem eigenständigen Block */
+    margin-bottom: 40px;    /* WICHTIG: Das ist dein Abstand zum Button! */
+    color: #e0e0e0;
+    font-weight: 600;
+    font-size: 1.1rem;
+    animation: neonPulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes neonPulse {
+    0% {
+        text-shadow: 0 0 5px rgba(18, 89, 243, 0.3),
+        0 0 10px rgba(18, 89, 243, 0.1);
+        color: #ffffff;
+    }
+    100% {
+        text-shadow: 0 0 10px rgba(18, 89, 243, 0.9),
+        0 0 20px rgba(18, 89, 243, 0.7),
+        0 0 40px rgba(18, 89, 243, 0.5);
+        color: #e0e0e0;
+    }
+}
+
+/* --- BUTTON VARIANTE 2: RADAR PULSE --- */
 .btn-primary {
     display: inline-block;
     background-color: #1259f3;
@@ -113,12 +138,30 @@ nav a:hover, nav a.active { color: #fff; }
     font-size: 1rem;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     border: 1px solid transparent;
+    /* Der dauerhafte Puls-Effekt */
+    animation: buttonPulse 2s infinite;
 }
 
 .btn-primary:hover {
     background-color: #0d46c4;
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(18, 89, 243, 0.3);
+    /* Beim Hover stoppt der Puls und wird zu einem starken, festen Leuchten */
+    animation: none;
+    box-shadow: 0 10px 30px rgba(18, 89, 243, 0.6);
+}
+
+/* Die Pulse-Animation */
+@keyframes buttonPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(18, 89, 243, 0.7);
+    }
+    70% {
+        /* Die Welle breitet sich 15px aus und wird unsichtbar */
+        box-shadow: 0 0 0 15px rgba(18, 89, 243, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(18, 89, 243, 0);
+    }
 }
 
 /* --- CINEMATIC BLUR REVEAL --- */
@@ -139,7 +182,7 @@ nav a:hover, nav a.active { color: #fff; }
    ========================================= */
 
 .wheel-section {
-    height: 400vh; /* Genug Zeit für 12 Bilder, schön cineastisch und ruhig */
+    height: 400vh;
     margin-top: 10vh;
     position: relative;
 }
@@ -155,13 +198,12 @@ nav a:hover, nav a.active { color: #fff; }
 
 .wheel-container {
     position: absolute;
-    bottom: -55vw; /* Zieht das gesamte Rad auf dem Bildschirm weiter nach unten (vorher -40vw) */
+    bottom: -55vw;
     left: 50%;
     width: 100vw;
     height: 100vw;
     margin-left: -50vw;
     border-radius: 50%;
-    /* BORDER WURDE GELÖSCHT: Die gestrichelte Linie ist komplett weg */
     transition: transform 0.1s linear;
 }
 
@@ -172,8 +214,6 @@ nav a:hover, nav a.active { color: #fff; }
     width: 240px;
     margin-left: -120px;
     transform-origin: center calc(50vw + 160px);
-
-    /* NEU: Ein perfekter Kreis, jedes Bild genau 30 Grad weiter */
     transform: rotate(calc(var(--i) * 30deg));
 }
 
@@ -511,7 +551,9 @@ footer {
     transform: translateY(0) scale(1);
 }
 
-/* --- RESPONSIVE (Mobil - Premium App Vibe) --- */
+/* =========================================
+   RESPONSIVE (Mobil - Premium App Vibe & Fixes)
+   ========================================= */
 @media (max-width: 900px) {
     .nav-container {
         flex-direction: column;
@@ -524,7 +566,7 @@ footer {
     .hero h1 { font-size: 2.2rem; }
     .hero p { font-size: 1rem; margin-bottom: 30px; }
 
-    /* === NEU: Horizontal Swipe Carousel fürs Handy === */
+    /* === Horizontal Swipe Carousel fürs Handy === */
     .wheel-blur-overlay { display: none; }
     .wheel-section { height: auto; padding: 40px 0; margin: 40px 0; overflow: hidden; }
     .wheel-sticky { position: relative; height: auto; overflow: visible; background-color: transparent; }
@@ -544,25 +586,38 @@ footer {
         flex-direction: row;
         gap: 15px;
         overflow-x: auto;
-        scroll-snap-type: x mandatory; /* Magnetisches Einrasten */
+        scroll-snap-type: x mandatory;
         padding: 0 20px;
-        -webkit-overflow-scrolling: touch; /* Butterweiches iOS Wischen */
-        scrollbar-width: none; /* Versteckt Scrollbar (Firefox) */
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
     }
 
-    /* Versteckt die unschöne Scrollbar (Chrome/Safari) */
     .wheel-container::-webkit-scrollbar { display: none; }
 
+    /* === BILDER-FIX FÜR MOBILE: Verhindert Verschiebung nach unten === */
     .wheel-item {
-        position: relative;
-        width: 85%; /* 85% Breite = das nächste Bild lugt rechts schon rein! */
-        flex-shrink: 0; /* Verhindert, dass die Bilder gequetscht werden */
-        left: auto;
-        margin: 0;
-        top: 0;
+        position: relative !important;
+        width: 85%;
+        flex-shrink: 0;
+        left: auto !important;
+        margin: 0 !important;
+        top: 0 !important;
+        padding: 0 !important;
         transform: none !important;
         max-width: none !important;
-        scroll-snap-align: center; /* Rasten exakt in der Mitte ein */
+        scroll-snap-align: center;
+        vertical-align: top;
+        display: block;
+    }
+
+    /* === RADIUS/RAHMEN-KILLER FÜR MOBILE === */
+    .wheel-item,
+    .wheel-item .img-wrapper,
+    .wheel-item img {
+        border-radius: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        outline: none !important;
     }
 
     /* Restliches Mobile-Layout (unverändert) */
@@ -582,48 +637,4 @@ footer {
 
     .about-section { flex-direction: column; text-align: center; }
     .about-img-wrapper { margin: 0 auto; }
-
-    /* --- TEXT ANIMATION: BREATHING GLOW --- */
-    .text-glow-pulse {
-        color: #ffffff;
-        /* 3 Sekunden Dauer, hin und her (alternate) für weiches Atmen */
-        animation: neonPulse 3s ease-in-out infinite alternate;
-    }
-
-    @keyframes neonPulse {
-        0% {
-            /* Schwacher Glow */
-            text-shadow: 0 0 5px rgba(18, 89, 243, 0.3),
-            0 0 10px rgba(18, 89, 243, 0.1);
-        }
-        100% {
-            /* Starker Glow */
-            text-shadow: 0 0 10px rgba(18, 89, 243, 0.9),
-            0 0 20px rgba(18, 89, 243, 0.7),
-            0 0 40px rgba(18, 89, 243, 0.5);
-        }
-    }
-
-    /* --- TEXT ANIMATION: GRADIENT SWEEP --- */
-    .text-glow-sweep {
-        /* Ein Farbverlauf von Grau über dein Blau zu Weiß */
-        background: linear-gradient(90deg, #888888, #1259f3, #ffffff, #1259f3, #888888);
-        background-size: 200% auto;
-
-        /* Schneidet den Hintergrund auf den Text zu */
-        color: #fff;
-        background-clip: text;
-        text-fill-color: transparent;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-
-        /* Die Endlos-Schleife */
-        animation: sweepGlow 4s linear infinite;
-    }
-
-    @keyframes sweepGlow {
-        to {
-            background-position: 200% center;
-        }
-    }
 }
