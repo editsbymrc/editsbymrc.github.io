@@ -12,18 +12,18 @@
 
 /* --- BILDERSCHUTZ (Gegen langes Drücken & Drag-and-Drop) --- */
 img {
-    -webkit-touch-callout: none; /* Verhindert das Menü beim langen Drücken (iOS/Safari) */
-    -webkit-user-select: none;   /* Verhindert das Markieren (Safari) */
-    -moz-user-select: none;      /* Verhindert das Markieren (Firefox) */
-    -ms-user-select: none;       /* Verhindert das Markieren (Edge) */
-    user-select: none;           /* Standard für moderne Browser */
-    -webkit-user-drag: none;     /* Verhindert das Rausziehen auf den Desktop */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
     pointer-events: auto;
 }
 
-/* --- GLOBALER HINTERGRUND (Schlicht & Elegant) --- */
+/* --- GLOBALER HINTERGRUND --- */
 body {
-    background-color: #050505; /* Ein pures, tiefes Schwarz ohne Schnickschnack */
+    background-color: #050505;
     color: #e0e0e0;
     line-height: 1.6;
     overflow-x: hidden;
@@ -96,36 +96,6 @@ nav a:hover, nav a.active { color: #fff; }
 
 .accent-text { color: #1259f3; }
 
-/* --- CINEMATIC BLUR REVEAL (Für die Hauptüberschrift) --- */
-/* --- CINEMATIC BLUR REVEAL (Bleibt nach Interaktion scharf) --- */
-.blur-reveal {
-    /* Startzustand: Unscharf */
-    filter: blur(12px);
-    opacity: 0.7;
-    /* Weicher Übergang, wenn es scharf wird */
-    transition: filter 1.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.5s ease;
-    cursor: pointer;
-}
-
-/* Diese Klasse wird später per Script hinzugefügt und bleibt dann für immer */
-.blur-reveal.focused {
-    filter: blur(0px);
-    opacity: 1;
-}
-
-@keyframes focusIn {
-    0% {
-        filter: blur(20px);
-        opacity: 0;
-        transform: scale(1.05);
-    }
-    100% {
-        filter: blur(0px); /* Perfekt scharf */
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
 .hero p {
     font-size: 1.25rem;
     color: #888;
@@ -151,63 +121,100 @@ nav a:hover, nav a.active { color: #fff; }
     box-shadow: 0 10px 25px rgba(18, 89, 243, 0.3);
 }
 
-/* --- VERTEILTE "BREATHING" GALERIE --- */
-.breathing-gallery-section {
-    max-width: 1400px;
-    margin: 0 auto 150px auto;
-    padding: 0 40px;
+/* --- CINEMATIC BLUR REVEAL --- */
+.blur-reveal {
+    filter: blur(12px);
+    opacity: 0.7;
+    transition: filter 1.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.5s ease;
+    cursor: pointer;
+}
+
+.blur-reveal.focused {
+    filter: blur(0px);
+    opacity: 1;
+}
+
+/* =========================================
+   SCROLL-WHEEL GALERIE (Kompakt, schnell & unsichtbare Schiene)
+   ========================================= */
+
+.wheel-section {
+    height: 400vh; /* Genug Zeit für 12 Bilder, schön cineastisch und ruhig */
+    margin-top: 10vh;
     position: relative;
 }
 
-.breathing-container {
-    display: flex;
-    flex-direction: column;
-    gap: 80px;
+.wheel-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    background-color: #050505;
 }
 
-.breathe-item {
-    position: relative;
-    max-width: 450px;
-    animation: floatAnimation 6s ease-in-out infinite;
+.wheel-container {
+    position: absolute;
+    bottom: -55vw; /* Zieht das gesamte Rad auf dem Bildschirm weiter nach unten (vorher -40vw) */
+    left: 50%;
+    width: 100vw;
+    height: 100vw;
+    margin-left: -50vw;
+    border-radius: 50%;
+    /* BORDER WURDE GELÖSCHT: Die gestrichelte Linie ist komplett weg */
+    transition: transform 0.1s linear;
 }
 
-/* Zick-Zack Verteilung */
-.breathe-item:nth-child(1) { align-self: flex-start; margin-left: 10%; }
-.breathe-item:nth-child(2) { align-self: flex-end; margin-right: 5%; margin-top: -50px; }
-.breathe-item:nth-child(3) { align-self: flex-start; margin-left: 5%; }
-.breathe-item:nth-child(4) { align-self: flex-end; margin-right: 15%; margin-top: -80px; }
+.wheel-item {
+    position: absolute;
+    top: -160px;
+    left: 50%;
+    width: 240px;
+    margin-left: -120px;
+    transform-origin: center calc(50vw + 160px);
 
-.breathe-item .img-wrapper {
-    position: relative;
+    /* NEU: Ein perfekter Kreis, jedes Bild genau 30 Grad weiter */
+    transform: rotate(calc(var(--i) * 30deg));
+}
+
+.wheel-item .img-wrapper {
     border-radius: 12px;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.05);
     background: #111;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.7);
+    transition: transform 0.4s ease;
 }
 
-.breathe-item img {
+.wheel-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.breathe-item:hover img { transform: scale(1.05); }
-
-.delay-1 { animation-delay: 0s; }
-.delay-2 { animation-delay: -1.5s; }
-.delay-3 { animation-delay: -3s; }
-.delay-4 { animation-delay: -4.5s; }
-
-@keyframes floatAnimation {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
-    100% { transform: translateY(0px); }
+.wheel-item:hover .img-wrapper {
+    transform: scale(1.05) translateY(-15px);
+    border-color: #1259f3;
 }
 
-/* --- KUNDENBEWERTUNGEN (Harmonisiert) --- */
+/* Der Blur-Effekt (Schluckt das Rad unten) */
+.wheel-blur-overlay {
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 35vh;
+    background: linear-gradient(to bottom, rgba(5,5,5,0) 0%, rgba(5,5,5,0.9) 60%, rgba(5,5,5,1) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    -webkit-mask-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 40%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 40%);
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* --- KUNDENBEWERTUNGEN --- */
 .testimonials-section {
     max-width: 1200px;
     margin: 120px auto;
@@ -504,10 +511,8 @@ footer {
     transform: translateY(0) scale(1);
 }
 
-/* --- RESPONSIVE (Mobil) --- */
-/* --- RESPONSIVE (Mobil - Hard Fix) --- */
+/* --- RESPONSIVE (Mobil - Premium App Vibe) --- */
 @media (max-width: 900px) {
-    /* 1. Navigation: Untereinander statt nebeneinander quetschen */
     .nav-container {
         flex-direction: column;
         gap: 15px;
@@ -515,22 +520,52 @@ footer {
     }
     nav ul { gap: 20px; }
 
-    /* 2. Hero: Abstände verkleinern und Text anpassen */
     .hero { padding: 140px 20px 60px 20px; }
     .hero h1 { font-size: 2.2rem; }
     .hero p { font-size: 1rem; margin-bottom: 30px; }
 
-    /* 3. Galerie: Zick-Zack komplett killen, alles schön stapeln */
-    .breathing-gallery-section { padding: 0 20px; margin-bottom: 80px; }
-    .breathing-container { gap: 30px; }
-    .breathe-item {
-        align-self: center !important;
-        margin: 0 !important;
-        width: 100% !important;
-        max-width: 100% !important;
+    /* === NEU: Horizontal Swipe Carousel fürs Handy === */
+    .wheel-blur-overlay { display: none; }
+    .wheel-section { height: auto; padding: 40px 0; margin: 40px 0; overflow: hidden; }
+    .wheel-sticky { position: relative; height: auto; overflow: visible; background-color: transparent; }
+
+    .wheel-container {
+        position: relative;
+        width: 100%;
+        height: auto;
+        bottom: auto;
+        left: auto;
+        margin: 0;
+        transform: none !important; /* Killt die Desktop-Drehung */
+        border: none;
+
+        /* Die Wisch-Mechanik */
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory; /* Magnetisches Einrasten */
+        padding: 0 20px;
+        -webkit-overflow-scrolling: touch; /* Butterweiches iOS Wischen */
+        scrollbar-width: none; /* Versteckt Scrollbar (Firefox) */
     }
 
-    /* 4. Layouts: Testimonials, Services und Slider sauber untereinander */
+    /* Versteckt die unschöne Scrollbar (Chrome/Safari) */
+    .wheel-container::-webkit-scrollbar { display: none; }
+
+    .wheel-item {
+        position: relative;
+        width: 85%; /* 85% Breite = das nächste Bild lugt rechts schon rein! */
+        flex-shrink: 0; /* Verhindert, dass die Bilder gequetscht werden */
+        left: auto;
+        margin: 0;
+        top: 0;
+        transform: none !important;
+        max-width: none !important;
+        scroll-snap-align: center; /* Rasten exakt in der Mitte ein */
+    }
+
+    /* Restliches Mobile-Layout (unverändert) */
     .testimonials-grid, .services-section, .showcase-row {
         grid-template-columns: 1fr;
         flex-direction: column;
@@ -538,13 +573,57 @@ footer {
     }
 
     .testimonials-section, .services-section, .showcase-section, .about-section {
-        margin: 80px auto; /* Abstände zwischen Sektionen verkleinern */
+        margin: 80px auto;
+        padding: 0 20px;
     }
 
     .showcase-slider { width: 100%; margin-top: 30px; }
     .showcase-text h3 { font-size: 2rem; }
 
-    /* 5. About: Zentrieren */
     .about-section { flex-direction: column; text-align: center; }
     .about-img-wrapper { margin: 0 auto; }
+
+    /* --- TEXT ANIMATION: BREATHING GLOW --- */
+    .text-glow-pulse {
+        color: #ffffff;
+        /* 3 Sekunden Dauer, hin und her (alternate) für weiches Atmen */
+        animation: neonPulse 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes neonPulse {
+        0% {
+            /* Schwacher Glow */
+            text-shadow: 0 0 5px rgba(18, 89, 243, 0.3),
+            0 0 10px rgba(18, 89, 243, 0.1);
+        }
+        100% {
+            /* Starker Glow */
+            text-shadow: 0 0 10px rgba(18, 89, 243, 0.9),
+            0 0 20px rgba(18, 89, 243, 0.7),
+            0 0 40px rgba(18, 89, 243, 0.5);
+        }
+    }
+
+    /* --- TEXT ANIMATION: GRADIENT SWEEP --- */
+    .text-glow-sweep {
+        /* Ein Farbverlauf von Grau über dein Blau zu Weiß */
+        background: linear-gradient(90deg, #888888, #1259f3, #ffffff, #1259f3, #888888);
+        background-size: 200% auto;
+
+        /* Schneidet den Hintergrund auf den Text zu */
+        color: #fff;
+        background-clip: text;
+        text-fill-color: transparent;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        /* Die Endlos-Schleife */
+        animation: sweepGlow 4s linear infinite;
+    }
+
+    @keyframes sweepGlow {
+        to {
+            background-position: 200% center;
+        }
+    }
 }
