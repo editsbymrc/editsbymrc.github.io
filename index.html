@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>editsbymrc. | Premium Auto Shootings</title>
-    <link rel="stylesheet" href="css/style.css?v=2.2">
+    <link rel="stylesheet" href="css/style.css?v=2.7">
 </head>
 
 <body oncontextmenu="return false;">
@@ -28,7 +28,7 @@
 <main>
     <section class="hero framer-reveal">
         <h1 class="blur-reveal">Auto Shootings auf dem <span class="accent-text">nächsten Level.</span></h1>
-        <p>Du willst mehr als nur Standard? Keine einfachen Handyfotos, sondern echtes Content auf Profiniveau. Ich hole die echte Dynamik aus deinem Wagen raus!</p>
+        <p>Du willst mehr als nur Standard? Keine einfachen Handyfotos, sondern echtes professionelle aufnahmen? Ich hole die echte Dynamik aus deinem Wagen raus!</p>
         <span class="text-glow-pulse">0% KI, 100% Hustle</span>
         <div class="hero-buttons">
             <a href="mailto:hasanmeric2204@gmail.com" class="btn-primary">Jetzt Shooting anfragen</a>
@@ -191,39 +191,64 @@
     </section>
 </main>
 
-<!-- === NEU: LIGHTBOX OVERLAY (Sicher platziert zwischen Main und Footer) === -->
 <div id="lightbox" class="lightbox">
     <span class="lightbox-close">&times;</span>
     <img class="lightbox-content" id="lightbox-img">
 </div>
-<!-- === ENDE LIGHTBOX === -->
 
 <footer>
     <p>&copy; 2026 editsbymrc. Alle Rechte vorbehalten.</p>
 </footer>
 
 <script>
+    // --- 1. DAS ULTIMATIVE ZENTRIER-SKRIPT FÜR MOBILE PFEILE ---
     document.addEventListener("DOMContentLoaded", function() {
         const scrollLeftBtn = document.getElementById('scrollLeft');
         const scrollRightBtn = document.getElementById('scrollRight');
         const wheelSlider = document.getElementById('scroll-wheel');
 
         if (scrollLeftBtn && scrollRightBtn && wheelSlider) {
+
+            function getActiveItemIndex() {
+                const items = wheelSlider.querySelectorAll('.wheel-item');
+                let closestIndex = 0;
+                let minDistance = Infinity;
+
+                const containerCenter = wheelSlider.getBoundingClientRect().left + (wheelSlider.offsetWidth / 2);
+
+                items.forEach((item, index) => {
+                    const itemCenter = item.getBoundingClientRect().left + (item.offsetWidth / 2);
+                    const distance = Math.abs(containerCenter - itemCenter);
+
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        closestIndex = index;
+                    }
+                });
+                return closestIndex;
+            }
+
             scrollLeftBtn.addEventListener('click', () => {
-                // Misst die exakte Breite von einem Bild + 15px Lücke
-                const itemWidth = wheelSlider.querySelector('.wheel-item').offsetWidth + 15;
-                wheelSlider.scrollBy({ left: -itemWidth, behavior: 'smooth' });
+                const items = wheelSlider.querySelectorAll('.wheel-item');
+                let currentIndex = getActiveItemIndex();
+
+                if (currentIndex > 0) {
+                    items[currentIndex - 1].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
             });
 
             scrollRightBtn.addEventListener('click', () => {
-                const itemWidth = wheelSlider.querySelector('.wheel-item').offsetWidth + 15;
-                wheelSlider.scrollBy({ left: itemWidth, behavior: 'smooth' });
+                const items = wheelSlider.querySelectorAll('.wheel-item');
+                let currentIndex = getActiveItemIndex();
+
+                if (currentIndex < items.length - 1) {
+                    items[currentIndex + 1].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
             });
         }
     });
-</script>
 
-<script>
+    // --- 2. VORHER/NACHHER SLIDER ---
     document.addEventListener("DOMContentLoaded", function() {
         const sliders = document.querySelectorAll('.before-after-wrapper');
 
@@ -241,25 +266,19 @@
             });
         });
     });
-</script>
 
-<script>
+    // --- 3. BLUR REVEAL (Text wird scharf) ---
     document.addEventListener("DOMContentLoaded", function() {
         const blurText = document.querySelector('.blur-reveal');
-
         if (blurText) {
-            const makeSharp = () => {
-                blurText.classList.add('focused');
-            };
-
+            const makeSharp = () => { blurText.classList.add('focused'); };
             window.addEventListener('mousemove', makeSharp, { once: true });
             window.addEventListener('touchstart', makeSharp, { once: true });
             window.addEventListener('scroll', makeSharp, { once: true });
         }
     });
-</script>
 
-<script>
+    // --- 4. DESKTOP SCROLL-RAD ANIMATION ---
     document.addEventListener("DOMContentLoaded", function() {
         const wheelSection = document.querySelector('.wheel-section');
         const wheel = document.getElementById('scroll-wheel');
@@ -268,7 +287,6 @@
             window.addEventListener('scroll', () => {
                 const rect = wheelSection.getBoundingClientRect();
                 const viewHeight = window.innerHeight;
-
                 const startOffset = viewHeight * 0.5;
                 const totalScroll = rect.height - viewHeight + startOffset;
 
@@ -276,33 +294,28 @@
                 progress = Math.max(0, Math.min(1, progress));
 
                 const angle = 0 - (progress * 120);
-
                 wheel.style.transform = `rotate(${angle}deg)`;
             });
         }
     });
-</script>
 
-<script>
+    // --- 5. FRAMER REVEAL (Elemente fliegen ein) ---
     document.addEventListener("DOMContentLoaded", function() {
-        const scrollLeftBtn = document.getElementById('scrollLeft');
-        const scrollRightBtn = document.getElementById('scrollRight');
-        const wheelSlider = document.getElementById('scroll-wheel');
-
-        if (scrollLeftBtn && scrollRightBtn && wheelSlider) {
-            scrollLeftBtn.addEventListener('click', () => {
-                wheelSlider.scrollBy({ left: -(window.innerWidth * 0.85), behavior: 'smooth' });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('framer-show');
+                    observer.unobserve(entry.target);
+                }
             });
+        }, { threshold: 0.1 });
 
-            scrollRightBtn.addEventListener('click', () => {
-                wheelSlider.scrollBy({ left: window.innerWidth * 0.85, behavior: 'smooth' });
-            });
-        }
+        document.querySelectorAll('.framer-reveal').forEach((el) => {
+            observer.observe(el);
+        });
     });
-</script>
 
-<script>
-    // --- ANIMIERTER PARTIKEL-HINTERGRUND (ELEGANT & PULSIEREND) ---
+    // --- 6. PARTIKEL HINTERGRUND ---
     document.addEventListener("DOMContentLoaded", function() {
         const canvas = document.getElementById('particle-canvas');
         if (!canvas) return;
@@ -327,7 +340,6 @@
                 this.pulseSpeed = Math.random() * 0.015 + 0.005;
                 this.opacity = 0;
             }
-
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
@@ -340,7 +352,6 @@
                 this.angle += this.pulseSpeed;
                 this.opacity = (Math.sin(this.angle) * 0.35) + 0.45;
             }
-
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -354,7 +365,6 @@
         function init() {
             particlesArray = [];
             let numberOfParticles = (canvas.width * canvas.height) / 12000;
-
             for (let i = 0; i < numberOfParticles; i++) {
                 particlesArray.push(new Particle());
             }
@@ -362,7 +372,6 @@
 
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-
             for (let i = 0; i < particlesArray.length; i++) {
                 particlesArray[i].update();
                 particlesArray[i].draw();
@@ -372,35 +381,27 @@
 
         init();
         animate();
-
-        window.addEventListener('resize', () => {
-            setCanvasSize();
-            init();
-        });
+        window.addEventListener('resize', () => { setCanvasSize(); init(); });
     });
-</script>
-<script>
-    // --- LIGHTBOX FUNKTION ---
+
+    // --- 7. LIGHTBOX (Bilder groß anzeigen) ---
     document.addEventListener("DOMContentLoaded", function() {
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
         const closeBtn = document.querySelector('.lightbox-close');
         const galleryImages = document.querySelectorAll('.wheel-item img');
 
-        // Klick auf ein Bild im Karussell
         galleryImages.forEach(img => {
             img.addEventListener('click', function() {
-                lightboxImg.src = this.src; // Zieht sich das jeweilige Bild
-                lightbox.classList.add('active'); // Öffnet das Overlay
+                lightboxImg.src = this.src;
+                lightbox.classList.add('active');
             });
         });
 
-        // Schließen durch Klick auf das "X"
         closeBtn.addEventListener('click', function() {
             lightbox.classList.remove('active');
         });
 
-        // Schließen durch Klick irgendwo daneben in den Hintergrund
         lightbox.addEventListener('click', function(e) {
             if (e.target !== lightboxImg) {
                 lightbox.classList.remove('active');

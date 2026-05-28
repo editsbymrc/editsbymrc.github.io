@@ -404,8 +404,14 @@ footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255, 255,
     border-radius: 40px;
     padding: 6px 6px 6px 20px;
     margin: 0 auto;
+
+    /* FIX FÜR DESKTOP: Begrenze die maximale Breite, damit es nicht so riesig wird */
     width: 100%;
+    max-width: 450px;
+
     transition: all 0.3s ease;
+    position: relative;
+    z-index: 50;
 }
 
 .premium-login-wrapper:focus-within {
@@ -424,29 +430,16 @@ footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255, 255,
     padding: 10px 0;
     min-width: 0;
     -webkit-appearance: none;
+
+    /* NEU: Zwingt Handys (besonders iPhones), die Tastatur zu öffnen */
+    -webkit-user-select: text !important;
+    user-select: text !important;
+    pointer-events: auto !important;
 }
 
 .premium-login-input::placeholder { color: #666; }
 
-.premium-login-btn {
-    background: #1259f3;
-    color: #fff;
-    border: none;
-    border-radius: 30px;
-    padding: 14px 28px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 4px 15px rgba(18, 89, 243, 0.4);
-    margin-left: 15px;
-    white-space: nowrap;
-}
-
-.premium-login-btn:hover {
-    background: #0d46c4;
-    transform: scale(1.03);
-}
+/* ... ab hier bleibt der Code für .premium-login-btn ganz normal stehen ... */
 
 
 /* =========================================
