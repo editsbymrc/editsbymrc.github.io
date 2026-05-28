@@ -18,7 +18,7 @@
         </div>
         <nav>
             <ul>
-                <li><a href="index.html" class="active">Portfolio</a></li>
+                <li><a href="index.html" class="active">Startseite</a></li>
                 <li><a href="galerie.html">Mein Shooting</a></li>
             </ul>
         </nav>
@@ -45,7 +45,7 @@
         <div class="wheel-sticky">
 
             <div class="scroll-indicator-arrows">
-                <span class="scroll-text">Scroll</span>
+                <span class="scroll-text">Scrollen</span>
                 <div class="arrow-container">
                     <div class="scroll-arrow"></div>
                     <div class="scroll-arrow"></div>
@@ -74,7 +74,7 @@
                 </div>
 
                 <div class="wheel-item" style="--i: 6;">
-                    <div class="img-wrapper ratio-2-3"><img src="assets/img/DSC01147.jpg" alt="Bild 7"></div>
+                    <div class="img-wrapper ratio-2-3"><img src="assets/img/DSC03248.jpg" alt="Bild 7"></div>
                 </div>
                 <div class="wheel-item" style="--i: 7;">
                     <div class="img-wrapper ratio-2-3"><img src="assets/img/IMG_2415.JPG" alt="Bild 8"></div>
@@ -204,18 +204,22 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('framer-show');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+        const scrollLeftBtn = document.getElementById('scrollLeft');
+        const scrollRightBtn = document.getElementById('scrollRight');
+        const wheelSlider = document.getElementById('scroll-wheel');
 
-        document.querySelectorAll('.framer-reveal').forEach((el) => {
-            observer.observe(el);
-        });
+        if (scrollLeftBtn && scrollRightBtn && wheelSlider) {
+            scrollLeftBtn.addEventListener('click', () => {
+                // Misst die exakte Breite von einem Bild + 15px Lücke
+                const itemWidth = wheelSlider.querySelector('.wheel-item').offsetWidth + 15;
+                wheelSlider.scrollBy({ left: -itemWidth, behavior: 'smooth' });
+            });
+
+            scrollRightBtn.addEventListener('click', () => {
+                const itemWidth = wheelSlider.querySelector('.wheel-item').offsetWidth + 15;
+                wheelSlider.scrollBy({ left: itemWidth, behavior: 'smooth' });
+            });
+        }
     });
 </script>
 

@@ -29,17 +29,17 @@
     <section class="hero framer-reveal" style="min-height: 80vh; display: flex; flex-direction: column; justify-content: center; padding-top: 150px;">
 
         <h1 class="blur-reveal" style="font-size: 3rem;">Dein privates <span class="accent-text">Shooting.</span></h1>
-        <p style="font-size: 1.15rem; color: #888; margin-bottom: 40px;">Exklusiver Zugang zu deinen Automotive-Shots.</p>
+        <p style="font-size: 1.15rem; color: #888; margin-bottom: 40px;">Exklusiver Zugang zu deinem Shooting.</p>
 
         <div class="service-card framer-reveal" style="max-width: 500px; width: 100%; margin: 0 auto; text-align: left; background: rgba(17, 17, 17, 0.7); backdrop-filter: blur(10px);">
-            <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #fff; text-align: center;">Kunden-Login</h3>
+            <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #fff; text-align: center;"> Kundenlogin</h3>
             <p style="color: #aaa; font-size: 1rem; line-height: 1.6; margin-bottom: 30px; text-align: center;">
-                Gib hier deinen persönlichen Shooting-Code ein, um auf deine Bilder zuzugreifen.
+                Gib hier deinen persönlichen Code ein, um auf deine Bilder zuzugreifen.
             </p>
 
-            <div class="login-wrapper">
-                <input type="text" id="shootingCode" class="login-input" placeholder="Z.B. M4-Test" onkeypress="handleEnter(event)">
-                <button onclick="openGallery()" class="btn-primary login-btn">Galerie öffnen</button>
+            <div class="premium-login-wrapper">
+                <input type="text" id="shootingCode" class="premium-login-input" placeholder="Z.B. C63-Marcel" onkeypress="handleEnter(event)" autocomplete="off">
+                <button onclick="openGallery()" class="premium-login-btn">Galerie öffnen</button>
             </div>
 
             <p id="error-msg" style="color: #ff4444; font-size: 0.9rem; margin-top: 15px; display: none; text-align: center;">Bitte gib einen gültigen Code ein.</p>

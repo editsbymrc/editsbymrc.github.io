@@ -50,10 +50,6 @@ img {
     pointer-events: auto;
 }
 
-/* --- HILFSKLASSEN --- */
-.ratio-2-3 { aspect-ratio: 2 / 3; }
-.ratio-3-2 { aspect-ratio: 3 / 2; }
-
 /* --- NAVIGATION --- */
 .glass-nav {
     position: fixed;
@@ -148,7 +144,6 @@ nav a:hover, nav a.active { color: #fff; }
    ========================================= */
 .wheel-section { height: 400vh; margin-top: 10vh; position: relative; }
 
-/* Die Hintergrundfarbe ist wieder #050505, damit es exakt wie vorher aussieht */
 .wheel-sticky { position: sticky; top: 0; height: 100vh; width: 100%; overflow: hidden; background-color: #050505; }
 .wheel-container {
     position: absolute; bottom: -68vw; left: 50%; width: 100vw; height: 100vw;
@@ -167,7 +162,7 @@ nav a:hover, nav a.active { color: #fff; }
     aspect-ratio: 2 / 3;
 }
 
-.wheel-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.wheel-item img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: pointer; }
 .wheel-item:hover .img-wrapper { transform: scale(1.05) translateY(-15px); border-color: #1259f3; }
 
 .wheel-blur-overlay {
@@ -206,7 +201,6 @@ nav a:hover, nav a.active { color: #fff; }
     align-items: center;
 }
 
-/* Die blauen Pfeilspitzen */
 .scroll-arrow {
     width: 14px;
     height: 14px;
@@ -217,18 +211,16 @@ nav a:hover, nav a.active { color: #fff; }
     animation: arrowPulse 1.5s infinite;
 }
 
-/* Lässt sie nacheinander wie einen Wasserfall aufleuchten */
 .scroll-arrow:nth-child(1) { animation-delay: 0s; }
 .scroll-arrow:nth-child(2) { animation-delay: 0.15s; }
 .scroll-arrow:nth-child(3) { animation-delay: 0.3s; }
 
 @keyframes arrowPulse {
     0% { opacity: 0; transform: rotate(45deg) translate(-5px, -5px); }
-    50% { opacity: 1; filter: drop-shadow(0 0 8px #1259f3); } /* Der blaue Glow */
+    50% { opacity: 1; filter: drop-shadow(0 0 8px #1259f3); }
     100% { opacity: 0; transform: rotate(45deg) translate(5px, 5px); }
 }
 
-/* PFEILE FÜR DESKTOP VERSTECKEN */
 .mobile-gallery-arrows { display: none; }
 
 /* --- KUNDENBEWERTUNGEN & SERVICES --- */
@@ -300,8 +292,9 @@ nav a:hover, nav a.active { color: #fff; }
 
 footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); color: #555; font-size: 0.85rem; }
 
+
 /* =========================================
-   KUNDEN-GALERIE (Für die privaten Seiten)
+   CINEMATIC CARD STACK (Kunden-Galerie 2:3 FIX)
    ========================================= */
 .client-hero {
     padding: 160px 20px 80px 20px;
@@ -324,42 +317,65 @@ footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255, 255,
     color: #888;
 }
 
-.client-gallery-grid {
-    max-width: 1400px;
+/* === SCROLL HINWEIS FÜR DIE KUNDENGALERIE === */
+.client-scroll-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px; /* Schöner Abstand zum Text */
+    pointer-events: none;
+}
+
+.client-scroll-indicator .scroll-text {
+    color: #888;
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+/* Die blauen Pfeile selbst (.scroll-arrow) ziehen sich ihr Design automatisch aus dem Code der Startseite! */
+
+.card-stack-container {
+    max-width: 1000px;
     margin: 0 auto 100px auto;
     padding: 0 20px;
-    display: grid;
-    /* Macht das Raster automatisch responsiv! */
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
-.client-gallery-grid .gallery-item {
-    width: 100%;
-    border-radius: 12px;
+.card-stack-item {
+    position: sticky;
+    top: 12vh;
+    height: 75vh; /* Standardhöhe am PC */
+    max-height: 800px; /* Begrenzung auf riesigen Monitoren */
+    width: auto;
+    aspect-ratio: 2 / 3; /* ZWINGT DIE KARTE INS 2:3 HOCHFORMAT */
+    margin: 0 auto 70vh auto; /* Zentriert die Karte horizontal! */
+
+    border-radius: 20px;
     overflow: hidden;
-    background: #111;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    cursor: pointer;
-    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+    background: #050505;
+    box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: filter 0.3s ease;
 }
 
-.client-gallery-grid .gallery-item img {
+.card-stack-container .card-stack-item:last-child {
+    margin-bottom: 10vh;
+}
+
+.card-stack-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
-    aspect-ratio: 3 / 2; /* Einheitliches Querformat für alle Bilder */
-    transition: transform 0.5s ease;
+    pointer-events: auto;
+    cursor: pointer; /* Zeigt, dass man klicken kann */
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.client-gallery-grid .gallery-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-    border-color: #1259f3;
-}
-
-.client-gallery-grid .gallery-item:hover img {
+.card-stack-item:hover img {
     transform: scale(1.03);
 }
 
@@ -375,6 +391,63 @@ footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255, 255,
     border: 1px solid rgba(255, 255, 255, 0.05);
     box-shadow: 0 20px 40px rgba(0,0,0,0.5);
 }
+
+
+/* =========================================
+   PREMIUM KUNDEN LOGIN (Glas-Pille)
+   ========================================= */
+.premium-login-wrapper {
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 40px;
+    padding: 6px 6px 6px 20px;
+    margin: 0 auto;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.premium-login-wrapper:focus-within {
+    border-color: #1259f3;
+    box-shadow: 0 0 20px rgba(18, 89, 243, 0.2);
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.premium-login-input {
+    flex: 1;
+    background: transparent !important;
+    border: none !important;
+    color: #fff !important;
+    font-size: 1.05rem;
+    outline: none;
+    padding: 10px 0;
+    min-width: 0;
+    -webkit-appearance: none;
+}
+
+.premium-login-input::placeholder { color: #666; }
+
+.premium-login-btn {
+    background: #1259f3;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    padding: 14px 28px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 15px rgba(18, 89, 243, 0.4);
+    margin-left: 15px;
+    white-space: nowrap;
+}
+
+.premium-login-btn:hover {
+    background: #0d46c4;
+    transform: scale(1.03);
+}
+
 
 /* =========================================
    RESPONSIVE (Mobil - Premium App Vibe)
@@ -399,7 +472,6 @@ footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255, 255,
     }
     .wheel-container::-webkit-scrollbar { display: none; }
 
-    /* === BILDER-FIX FÜR MOBILE === */
     .wheel-item {
         position: relative !important;
         width: 85%;
@@ -440,15 +512,117 @@ footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255, 255,
     }
     .arrow-btn:active { transform: scale(0.9); background: #0d46c4; }
 
-    /* NEU: Scroll-Pfeile auf dem Handy verstecken */
     .scroll-indicator-arrows { display: none !important; }
 
     /* === FIX FÜR BEWERTUNGEN & SERVICES === */
-    .testimonials-grid, .services-section { display: flex !important; flex-direction: column !important; width: 100% !important; gap: 20px !important; padding: 0 !important; }
-    .testimonial-card, .service-card { width: 100% !important; max-width: 100vw !important; padding: 30px 25px !important; margin: 0 !important; box-sizing: border-box !important; }
-    .testimonials-section, .showcase-section, .about-section { width: 100% !important; max-width: 100vw !important; padding: 0 20px !important; margin-left: auto !important; margin-right: auto !important; box-sizing: border-box !important; overflow-x: hidden !important; }
+    .testimonials-grid, .services-section {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 20px !important;
+        padding: 0 !important;
+    }
+
+    .testimonial-card, .service-card {
+        width: calc(100% - 40px) !important;
+        max-width: 100% !important;
+        padding: 30px 25px !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+    }
+
+    .testimonials-section, .showcase-section, .about-section {
+        width: 100% !important;
+        max-width: 100vw !important;
+        padding: 0 20px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden !important;
+    }
+
     .testimonial-client { flex-wrap: wrap !important; }
-} /* <--- HIER ENDET DER HANDY-BEREICH! ALLES DANACH GILT WIEDER FÜR ALLE! ---> */
+
+    /* === BESSERES MOBILE LAYOUT FÜR SLIDER & ÜBER MICH === */
+    .showcase-row {
+        flex-direction: column !important;
+        gap: 30px !important;
+        text-align: center;
+    }
+
+    .showcase-row:nth-child(even) {
+        flex-direction: column !important;
+    }
+
+    .showcase-text, .showcase-slider {
+        width: 100% !important;
+        flex: none !important;
+    }
+
+    .showcase-slider {
+        margin-top: 10px;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .about-section {
+        flex-direction: column !important;
+        text-align: center;
+        gap: 30px !important;
+    }
+
+    /* === MOBILE OPTIMIERUNG: LOGIN === */
+    .premium-login-wrapper {
+        flex-direction: column;
+        border-radius: 16px;
+        padding: 15px;
+        background: rgba(0, 0, 0, 0.4);
+    }
+
+    .premium-login-input {
+        width: 100%;
+        text-align: center;
+        padding: 5px 0 15px 0;
+        font-size: 1.15rem;
+    }
+
+    .premium-login-btn {
+        width: 100%;
+        margin-left: 0;
+        padding: 16px;
+        border-radius: 12px;
+        font-size: 1rem;
+    }
+
+    /* === MOBILE OPTIMIERUNG: CARD STACK (Kunden-Template) === */
+    .client-hero {
+        padding: 130px 20px 40px 20px !important;
+    }
+
+    .client-hero h1 {
+        font-size: 2.2rem !important;
+    }
+
+    .card-stack-item {
+        top: 10vh;
+        width: 100%; /* Füllt die Breite des Handys aus */
+        height: auto; /* Höhe wird durch Aspect-Ratio berechnet */
+        aspect-ratio: 2 / 3; /* Bleibt auch auf dem Handy zu 100% im Format */
+        border-radius: 16px;
+        margin-bottom: 80vh;
+    }
+
+    .download-cta-section {
+        padding: 40px 25px !important;
+        width: calc(100% - 40px) !important;
+        margin: 0 auto 60px auto !important;
+    }
+
+    .download-cta-section h3 {
+        font-size: 1.5rem !important;
+    }
+}
 
 /* =========================================
    LIGHTBOX (Bilder groß anzeigen)
@@ -479,6 +653,12 @@ footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255, 255,
     box-shadow: 0 0 50px rgba(0,0,0,0.8);
     object-fit: contain;
     animation: zoomIn 0.3s ease;
+
+    /* === BILDERSCHUTZ FÜR DIE LIGHTBOX === */
+    pointer-events: none !important;
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
 }
 
 .lightbox-close {
@@ -499,9 +679,4 @@ footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255, 255,
 @keyframes zoomIn {
     from { transform: scale(0.95); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
-}
-
-/* Zeigt dem User in der Galerie, dass er klicken kann */
-.wheel-item img {
-    cursor: pointer;
 }

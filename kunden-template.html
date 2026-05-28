@@ -7,7 +7,7 @@
   <meta name="robots" content="noindex, nofollow">
 
   <title>Dein Shooting | editsbymrc.</title>
-  <link rel="stylesheet" href="css/style.css?v=2.4">
+  <link rel="stylesheet" href="css/style.css?v=2.5">
 </head>
 
 <body oncontextmenu="return false;">
@@ -35,57 +35,56 @@
     <p style="color: #1259f3; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;">Shooting Galerie</p>
     <h1 class="blur-reveal">Mercedes C63 AMG</h1>
     <p>Exklusiv für Marcel &bull; Aufgenommen im Juni 2026</p>
+    <!-- NEU: DER SCROLL HINWEIS -->
+    <div class="client-scroll-indicator framer-reveal" style="transition-delay: 0.4s;">
+      <span class="scroll-text">Scrollen</span>
+      <div class="arrow-container">
+        <div class="scroll-arrow"></div>
+        <div class="scroll-arrow"></div>
+        <div class="scroll-arrow"></div>
+      </div>
+    </div>
   </section>
 
-  <!-- GALERIE RASTER: Hier kopierst du einfach für jedes Bild einen Block -->
-  <section class="client-gallery-grid">
+  <!-- GALERIE RASTER: Cinematic Card Stack -->
+  <section class="card-stack-container">
 
-    <!-- BILD 1 -->
-    <div class="gallery-item framer-reveal">
-      <!-- Passe hier den Bildpfad (src) an -->
-      <img src="assets/img/IMG_2415.JPG" alt="Shooting Bild">
+    <div class="card-stack-item framer-reveal">
+      <img src="assets/img/IMG_2415.JPG" alt="Shooting Bild 1">
     </div>
 
-    <!-- BILD 2 -->
-    <div class="gallery-item framer-reveal" style="transition-delay: 0.1s;">
-      <img src="assets/img/IMG_2416.JPG" alt="Shooting Bild">
+    <div class="card-stack-item framer-reveal">
+      <img src="assets/img/IMG_2416.JPG" alt="Shooting Bild 2">
     </div>
 
-    <!-- BILD 3 -->
-    <div class="gallery-item framer-reveal" style="transition-delay: 0.2s;">
-      <img src="assets/img/IMG_2417.JPG" alt="Shooting Bild">
+    <div class="card-stack-item framer-reveal">
+      <img src="assets/img/IMG_2417.JPG" alt="Shooting Bild 3">
     </div>
 
-    <!-- BILD 4 -->
-    <div class="gallery-item framer-reveal">
-      <img src="assets/img/IMG_2420.JPG" alt="Shooting Bild">
+    <div class="card-stack-item framer-reveal">
+      <img src="assets/img/IMG_2420.JPG" alt="Shooting Bild 4">
     </div>
 
-    <!-- BILD 5 -->
-    <div class="gallery-item framer-reveal" style="transition-delay: 0.1s;">
-      <img src="assets/img/IMG_2422.JPG" alt="Shooting Bild">
+    <div class="card-stack-item framer-reveal">
+      <img src="assets/img/IMG_2422.JPG" alt="Shooting Bild 5">
     </div>
 
-    <!-- BILD 6 -->
-    <div class="gallery-item framer-reveal" style="transition-delay: 0.2s;">
-      <img src="assets/img/DSC01147.jpg" alt="Shooting Bild">
+    <div class="card-stack-item framer-reveal">
+      <img src="assets/img/DSC02975.jpg" alt="Shooting Bild 6">
     </div>
-
-    <!-- Du kannst diesen Block so oft kopieren, wie du Bilder hast! -->
 
   </section>
 
   <!-- DOWNLOAD TRESOR -->
   <section class="download-cta-section framer-reveal">
-    <h3 style="color: #fff; font-size: 1.8rem; margin-bottom: 15px;">High-Res Dateien herunterladen</h3>
+    <h3 style="color: #fff; font-size: 1.8rem; margin-bottom: 15px;">Alle Bilder herunterladen</h3>
     <p style="color: #aaa; margin-bottom: 30px; font-size: 1.05rem; line-height: 1.6;">
-      Die Bilder in dieser Galerie sind für das Web optimiert. Klicke auf den Button, um alle Dateien in voller Auflösung für den Druck und Social Media herunterzuladen. <br><br>
-      <span style="color: #1259f3; font-weight: 600;">Du benötigst dein persönliches Download-Passwort.</span>
+      Klicke auf den Button, um alle Dateien in maximaler Auflösung herunterzuladen.
     </p>
 
     <!-- HIER FÜGST DU DEINEN PICDROP / WETRANSFER / DRIVE LINK EIN -->
     <a href="https://dein-cloud-link.de" target="_blank" class="btn-primary" style="padding: 18px 40px; font-size: 1.1rem;">
-      .ZIP herunterladen
+      Herunterladen
     </a>
   </section>
 </main>
@@ -127,12 +126,12 @@
     }
   });
 
-  // 3. Lightbox Funktion (Bilder vergrößern)
+  // 3. Lightbox Funktion (Bilder vergrößern - GEFIXT FÜR DEN CARD STACK)
   document.addEventListener("DOMContentLoaded", function() {
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const closeBtn = document.querySelector('.lightbox-close');
-    const galleryImages = document.querySelectorAll('.gallery-item img');
+    const galleryImages = document.querySelectorAll('.card-stack-item img'); // <-- HIER WAR DER FEHLER!
 
     galleryImages.forEach(img => {
       img.addEventListener('click', function() {
