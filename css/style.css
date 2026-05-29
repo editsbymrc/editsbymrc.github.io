@@ -524,6 +524,23 @@ footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255, 255,
         margin-bottom: 45px;
     }
 
+    /* === MOBILE BUTTON SPACING === */
+    .hero-buttons {
+        /* Gibt dem Button ordentlich Platz nach oben und unten */
+        margin-top: 20px;
+        margin-bottom: 30px;
+        width: 100%;
+        padding: 0 10px; /* Ein kleiner Seitenabstand */
+    }
+
+    .hero .btn-primary {
+        /* OPTIONAL: Macht den Button auf dem Handy über die volle Breite.
+           Sieht extrem nach nativer Smartphone-App aus! */
+        display: block;
+        width: 100%;
+        padding: 18px 0; /* Etwas höherer Button für entspanntes Tippen */
+    }
+
     /* === Horizontal Swipe Carousel fürs Handy === */
     .wheel-blur-overlay { display: none; }
 
