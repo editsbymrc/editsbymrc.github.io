@@ -797,33 +797,56 @@ footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255, 255,
    ANIMIERTES SCHLOSS (Kunden-Login)
    ========================================= */
 .locked-heading {
-    /* WICHTIG: Erlaubt dem Text, sich zu stapeln, wenn es zu eng wird,
-       aber zwingt die Elemente in eine Zeile, solange genug Platz da ist */
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    flex-wrap: nowrap; /* Verhindert das Umbrechen auf Teufel komm raus */
-    font-size: 1.8rem; /* Macht die Schrift auf dem Handy einen Tick kleiner */
-    padding: 0 10px;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+/* WICHTIG: Das hält die Wörter wie mit Sekundenkleber zusammen! Kein Umbrechen mehr. */
+.text-wrapper {
+    white-space: nowrap;
 }
 
 .lock-icon {
-    width: 30px !important; /* Etwas kleineres Schloss auf dem Handy */
-    height: 30px !important;
-    flex-shrink: 0; /* Verhindert, dass das Schloss gestaucht wird */
-    margin-left: 10px;
+    width: 45px;
+    height: 45px;
+    color: #1259f3;
+    flex-shrink: 0; /* Verhindert, dass das Schloss auf dem Handy plattgedrückt wird */
+    animation: lockFloat 2.5s infinite alternate ease-in-out;
 }
 
-/* Die neue, fließende Auf- und Ab-Bewegung */
 @keyframes lockFloat {
-    0% {
-        transform: translateY(5px); /* Startet leicht unten */
-        filter: drop-shadow(0 2px 8px rgba(18, 89, 243, 0.4));
+    0% { transform: translateY(3px); filter: drop-shadow(0 2px 8px rgba(18, 89, 243, 0.4)); }
+    100% { transform: translateY(-3px); filter: drop-shadow(0 15px 15px rgba(18, 89, 243, 0.6)); }
+}
+
+/* --- MOBILE ANPASSUNG FÜRS SCHLOSS --- */
+@media (max-width: 900px) {
+    .locked-heading {
+        /* Überschreibt die Standard-Größe, damit Text + Schloss perfekt aufs Handy passen */
+        font-size: 1.8rem !important;
+        gap: 10px;
     }
-    100% {
-        transform: translateY(-5px); /* Schwebt nach oben */
-        /* Schatten wandert nach unten und wird weicher, für echten 3D-Look */
-        filter: drop-shadow(0 15px 15px rgba(18, 89, 243, 0.6));
+    .lock-icon {
+        width: 32px;
+        height: 32px;
     }
+}
+/* =========================================
+   HIGH-END SHIMMER EFFEKT (Download-Text)
+   ========================================= */
+.shimmer-text {
+    background: linear-gradient(90deg, #ffffff 0%, #1259f3 50%, #ffffff 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmerLight 3.5s linear infinite;
+    display: inline-block;
+}
+
+@keyframes shimmerLight {
+    to { background-position: 200% center; }
 }

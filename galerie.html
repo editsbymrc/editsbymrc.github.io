@@ -28,7 +28,7 @@
 <main>
     <section class="hero framer-reveal" style="min-height: 80vh; display: flex; flex-direction: column; justify-content: center; padding-top: 150px;">
 
-        <h1 class="locked-heading">
+        <h1 class="locked-heading blur-reveal">
             Dein privates <span class="accent-text">Shooting.</span>
             <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
@@ -182,6 +182,19 @@
             setCanvasSize();
             init();
         });
+    });
+</script>
+
+<script>
+    // Blur Reveal (Titel Scharfstellen)
+    document.addEventListener("DOMContentLoaded", function() {
+        const blurText = document.querySelector('.blur-reveal');
+        if (blurText) {
+            const makeSharp = () => { blurText.classList.add('focused'); };
+            window.addEventListener('mousemove', makeSharp, { once: true });
+            window.addEventListener('touchstart', makeSharp, { once: true });
+            setTimeout(makeSharp, 1000); // Zur Sicherheit: Stellt sich nach 1 Sekunde automatisch scharf
+        }
     });
 </script>
 

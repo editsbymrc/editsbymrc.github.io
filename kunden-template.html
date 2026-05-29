@@ -30,12 +30,19 @@
 </header>
 
 <main>
-  <!-- HERO BEREICH: Hier trägst du den Kunden und das Auto ein -->
   <section class="client-hero framer-reveal">
     <p style="color: #1259f3; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;">Shooting Galerie</p>
-    <h1 class="blur-reveal">Mercedes C63 AMG</h1>
-    <p>Exklusiv für Marcel &bull; Aufgenommen im Juni 2026</p>
-    <!-- NEU: DER SCROLL HINWEIS -->
+
+    <h1 class="locked-heading letter-reveal">
+      <span class="text-wrapper" id="client-animated-text"></span>
+
+      <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+      </svg>
+    </h1>
+    <p style="font-size: 1.15rem; color: #888; margin-bottom: 40px;">Exklusiver Zugang zu deinem Shooting.</p>
+
     <div class="client-scroll-indicator framer-reveal" style="transition-delay: 0.4s;">
       <span class="scroll-text">Scrollen</span>
       <div class="arrow-container">
@@ -77,8 +84,7 @@
 
   <!-- DOWNLOAD TRESOR -->
   <section class="download-cta-section framer-reveal">
-    <h3 style="font-size: 1.8rem; color: #fff; margin-bottom: 15px;">Deine Bilder in voller Auflösung</h3>
-    <p style="color: #aaa; font-size: 1.05rem; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+    <h3 class="shimmer-text" style="font-size: 1.8rem; margin-bottom: 15px;">Deine Bilder in voller Auflösung</h3>    <p style="color: #aaa; font-size: 1.05rem; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
       Hier kannst du alle bearbeiteten Fotos in maximaler Qualität herunterladen.
     </p>
 
@@ -210,5 +216,32 @@
   });
 </script>
 
+<script>
+  // --- PREMIUM BUCHSTABEN-ANIMATION (KUNDEN-TEMPLATE) ---
+  document.addEventListener("DOMContentLoaded", function() {
+    const container = document.getElementById('client-animated-text');
+    if (!container) return;
+
+    // Hier legst du deinen Text fest
+    const text1 = "Dein privates";
+    const text2 = "Shooting.";
+    let delay = 0;
+
+    function processText(text) {
+      return text.split(" ").map(word => {
+        let wordHtml = `<span style="white-space: nowrap;">`;
+        for (let char of word) {
+          wordHtml += `<span class="char" style="animation-delay: ${delay}s">${char}</span>`;
+          delay += 0.035; // Geschwindigkeit der Buchstaben
+        }
+        wordHtml += `</span>`;
+        return wordHtml;
+      }).join(" ");
+    }
+
+    // Baut den Text zusammen und färbt "Shooting." blau ein
+    container.innerHTML = processText(text1) + " <span class='accent-text'>" + processText(text2) + "</span>";
+  });
+</script>
 </body>
 </html>
