@@ -511,18 +511,17 @@ footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255, 255,
 
     /* === MOBILE HERO BEREICH (Mehr Luft zum Atmen) === */
     .hero {
-        padding: 140px 20px 0px 20px !important; /* Zieht den ganzen Block etwas weiter runter von der Glas-Navi */
+        /* FIX: Die 60px am Ende schieben den kompletten Bilder-Slider deutlich weiter nach unten! */
+        padding: 140px 20px 60px 20px !important;
     }
     .hero h1 {
         font-size: 2.2rem;
-        margin-bottom: 20px; /* Schön viel Platz unter der fetten Überschrift */
+        margin-bottom: 20px;
     }
     .hero p {
         font-size: 1rem;
-        margin-bottom: 25px; /* Text klebt nicht mehr am Slogan */
-    }
-    .text-glow-pulse {
-        margin-bottom: 45px !important; /* Gibt dem Button ordentlich Freiraum nach oben */
+        /* FIX: 45px schiebt den Button jetzt richtig schön weit weg vom Fließtext */
+        margin-bottom: 45px;
     }
 
     /* === Horizontal Swipe Carousel fürs Handy === */
@@ -610,21 +609,44 @@ footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255, 255,
 
     .scroll-indicator-arrows { display: none !important; }
 
-    /* === FIX FÜR BEWERTUNGEN & SERVICES === */
+    /* === HORIZONTALES SWIPE-KARUSSELL FÜR BEWERTUNGEN & SERVICES === */
     .testimonials-grid, .services-section {
         display: flex !important;
-        flex-direction: column !important;
-        width: 100% !important;
-        gap: 20px !important;
-        padding: 0 !important;
+        flex-direction: row !important; /* Zwingt die Karten nebeneinander */
+
+        /* Bricht den Container auf volle Handybreite auf, für unendliches Wischen: */
+        width: 100vw !important;
+        position: relative !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+
+        gap: 15px !important;
+        padding: 10px 20px 40px 20px !important;
+
+        /* Aktiviert die Wischfunktion: */
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        -webkit-overflow-scrolling: touch !important; /* Butterweich auf iPhones */
+        scrollbar-width: none !important; /* Versteckt den hässlichen Scrollbalken */
+    }
+
+    /* Versteckt den Scrollbalken in Chrome/Safari */
+    .testimonials-grid::-webkit-scrollbar,
+    .services-section::-webkit-scrollbar {
+        display: none !important;
     }
 
     .testimonial-card, .service-card {
-        width: calc(100% - 40px) !important;
-        max-width: 100% !important;
+        /* Nimmt 85% Breite ein. So sieht man rechts immer schon die nächste Karte! */
+        width: 85% !important;
+        max-width: 320px !important;
+
+        flex-shrink: 0 !important; /* Verhindert, dass der Browser die Karten quetscht */
         padding: 30px 25px !important;
-        margin: 0 auto !important;
-        box-sizing: border-box !important;
+        margin: 0 !important;
+
+        /* Das Magnet-Feature: Rastet beim Wischen genau zentriert ein */
+        scroll-snap-align: center !important;
     }
 
     .testimonials-section, .showcase-section, .about-section {
@@ -818,9 +840,18 @@ footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255, 255,
     animation: lockFloat 2.5s infinite alternate ease-in-out;
 }
 
+/* Die neue, fließende Auf- und Ab-Bewegung MIT organischer Neigung */
 @keyframes lockFloat {
-    0% { transform: translateY(3px); filter: drop-shadow(0 2px 8px rgba(18, 89, 243, 0.4)); }
-    100% { transform: translateY(-3px); filter: drop-shadow(0 15px 15px rgba(18, 89, 243, 0.6)); }
+    0% {
+        /* Startet unten und ist um 12 Grad gekippt */
+        transform: translateY(4px) rotate(12deg);
+        filter: drop-shadow(0 2px 8px rgba(18, 89, 243, 0.4));
+    }
+    100% {
+        /* Schwebt nach oben und dreht sich sanft ein winziges Stück zurück (auf 8 Grad) */
+        transform: translateY(-4px) rotate(8deg);
+        filter: drop-shadow(0 15px 15px rgba(18, 89, 243, 0.6));
+    }
 }
 
 /* --- MOBILE ANPASSUNG FÜRS SCHLOSS --- */
