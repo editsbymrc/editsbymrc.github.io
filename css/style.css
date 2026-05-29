@@ -280,6 +280,39 @@ nav a:hover, nav a.active { color: #fff; }
 .slider-line { position: absolute; top: 0; left: 50%; width: 2px; height: 100%; background: white; z-index: 3; transform: translateX(-50%); }
 .slider-button { position: absolute; top: 50%; left: 50%; width: 50px; height: 50px; background: #1259f3; border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 4; transform: translate(-50%, -50%); border: 3px solid white; color: white; font-weight: bold; animation: buttonPulse 3s infinite}
 
+/* --- SERVICE ICONS --- */
+.service-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(18, 89, 243, 0.1); /* Zartes, transparentes Blau */
+    border: 1px solid rgba(18, 89, 243, 0.3); /* Leichte blaue Kontur */
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px; /* Abstand zur Überschrift */
+    color: #1259f3; /* Deine Akzentfarbe für das Icon selbst */
+    transition: all 0.4s ease;
+}
+
+/* Lässt das Icon leuchten, wenn man mit der Maus über die Karte fährt */
+.service-card:hover .service-icon {
+    background: #1259f3;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(18, 89, 243, 0.4);
+    transform: scale(1.05) rotate(-5deg);
+}
+
+.service-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
 /* --- ABOUT & FINAL CTA --- */
 .about-section { display: flex; align-items: center; max-width: 800px; margin: 120px auto; gap: 40px; padding: 0 20px; }
 .about-img-wrapper { width: 150px; height: 150px; border-radius: 50%; border: 2px solid #1259f3; overflow: hidden; flex-shrink: 0; padding: 7px; background-color: #050505; }
@@ -476,11 +509,21 @@ footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255, 255,
     .nav-container { flex-direction: column; gap: 15px; padding: 15px; }
     nav ul { gap: 20px; }
 
-    .hero { padding: 110px 20px 0px 20px !important; }
-    .hero h1 { font-size: 2.2rem; }
-    .hero p { font-size: 1rem; margin-bottom: 10px; }
-
-    .text-glow-pulse { margin-bottom: 25px !important; }
+    /* === MOBILE HERO BEREICH (Mehr Luft zum Atmen) === */
+    .hero {
+        padding: 140px 20px 0px 20px !important; /* Zieht den ganzen Block etwas weiter runter von der Glas-Navi */
+    }
+    .hero h1 {
+        font-size: 2.2rem;
+        margin-bottom: 20px; /* Schön viel Platz unter der fetten Überschrift */
+    }
+    .hero p {
+        font-size: 1rem;
+        margin-bottom: 25px; /* Text klebt nicht mehr am Slogan */
+    }
+    .text-glow-pulse {
+        margin-bottom: 45px !important; /* Gibt dem Button ordentlich Freiraum nach oben */
+    }
 
     /* === Horizontal Swipe Carousel fürs Handy === */
     .wheel-blur-overlay { display: none; }
@@ -749,4 +792,34 @@ footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255, 255,
 @keyframes zoomIn {
     from { transform: scale(0.95); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
+}
+/* =========================================
+   ANIMIERTES SCHLOSS (Kunden-Login)
+   ========================================= */
+.locked-heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px; /* Abstand zwischen Schloss und Text */
+}
+
+.lock-icon {
+    width: 45px;
+    height: 45px;
+    color: #1259f3;
+    /* FIX: Neue Schwebe-Animation eingebunden */
+    animation: lockFloat 2.5s infinite alternate ease-in-out;
+}
+
+/* Die neue, fließende Auf- und Ab-Bewegung */
+@keyframes lockFloat {
+    0% {
+        transform: translateY(5px); /* Startet leicht unten */
+        filter: drop-shadow(0 2px 8px rgba(18, 89, 243, 0.4));
+    }
+    100% {
+        transform: translateY(-5px); /* Schwebt nach oben */
+        /* Schatten wandert nach unten und wird weicher, für echten 3D-Look */
+        filter: drop-shadow(0 15px 15px rgba(18, 89, 243, 0.6));
+    }
 }
