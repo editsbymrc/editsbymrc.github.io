@@ -27,9 +27,7 @@
 
 <main>
     <section class="hero framer-reveal">
-        <h1 class="blur-reveal">Auto Shootings auf dem <span class="accent-text">nächsten Level.</span></h1>
-        <p>Du willst mehr als nur Standard? Keine einfachen Handyfotos, sondern echtes professionelle aufnahmen? Ich hole die echte Dynamik aus deinem Wagen raus!</p>
-        <span class="text-glow-pulse">0% KI, 100% Hustle</span>
+        <h1 class="letter-reveal">Auto Shootings auf dem <span class="accent-text">nächsten Level.</span></h1>        <p>Du willst mehr als nur Standard? Keine einfachen Handyfotos, sondern echtes professionelle aufnahmen? Ich hole die echte Dynamik aus deinem Wagen raus!</p>
         <div class="hero-buttons">
             <a href="mailto:hasanmeric2204@gmail.com" class="btn-primary">Jetzt Shooting anfragen</a>
         </div>
@@ -409,5 +407,38 @@
         });
     });
 </script>
+
+<script>
+    // --- PREMIUM BUCHSTABEN-ANIMATION (WORT-BRUCH FIX) ---
+    document.addEventListener("DOMContentLoaded", function() {
+        const headline = document.querySelector('.letter-reveal');
+        if (!headline) return;
+
+        // WICHTIG: Hier habe ich das Leerzeichen am Ende von "dem" entfernt, das regelt das Skript jetzt selbst!
+        const text1 = "Auto Shootings auf dem";
+        const text2 = "nächsten Level.";
+
+        let delay = 0;
+
+        // Diese schlaue Funktion hält Wörter zusammen und animiert die Buchstaben
+        function processText(text) {
+            // Teilt den Satz in Wörter auf
+            return text.split(" ").map(word => {
+                // Hält das Wort als Block zusammen
+                let wordHtml = `<span style="white-space: nowrap;">`;
+                for (let char of word) {
+                    wordHtml += `<span class="char" style="animation-delay: ${delay}s">${char}</span>`;
+                    delay += 0.035; // Geschwindigkeit (kleiner = schneller)
+                }
+                wordHtml += `</span>`;
+                return wordHtml;
+            }).join(" "); // Fügt saubere Leerzeichen zwischen den Wörtern ein
+        }
+
+        // Baut alles zusammen (inklusive deines blauen Akzents!)
+        headline.innerHTML = processText(text1) + " <span class='accent-text'>" + processText(text2) + "</span>";
+    });
+</script>
+
 </body>
 </html>
