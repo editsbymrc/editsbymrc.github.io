@@ -79,11 +79,14 @@ nav a:hover, nav a.active { color: #fff; }
 
 /* --- HERO SECTION --- */
 .hero {
-    /* FIX: Top-Padding leicht reduziert und Bottom-Padding auf 0, um toten Raum zu killen */
-    padding: 120px 20px 0px 20px;
+    padding: 130px 20px 30px 20px; /* Leichtes Padding nach unten hinzugefügt */
     text-align: center;
     max-width: 800px;
     margin: 0 auto;
+
+    /* Der Schutzschild bleibt: */
+    position: relative;
+    z-index: 100;
 }
 
 .hero h1 { font-size: 4rem; font-weight: 800; letter-spacing: -2px; line-height: 1.1; margin-bottom: 24px; color: #ffffff; }
@@ -144,15 +147,16 @@ nav a:hover, nav a.active { color: #fff; }
 /* =========================================
    SCROLL-WHEEL GALERIE (Desktop)
    ========================================= */
-.wheel-section { height: 400vh; margin-top: 0; position: relative; }
+.wheel-section { height: 400vh; margin-top: 0; position: relative; } /* Negativen margin entfernt! */
 
 .wheel-sticky { position: sticky; top: 0; height: 100vh; width: 100%; overflow: hidden; background-color: #050505; }
+
 .wheel-container {
     position: absolute;
 
-    /* FIX: Das ist der absolute Gamechanger! Vorher war hier -68vw.
-       Indem wir -55vw setzen, ziehen wir das gesamte Rad physisch viel weiter in den Bildschirm. */
-    bottom: -55vw;
+    /* DER MAGISCHE MATH-FIX FÜR ULTRAWIDE/4K MONITORE:
+       Berechnet den Abstand so, dass die Bilder IMMER unter dem Button bleiben! */
+    bottom: calc(-100vw + 100vh - 550px);
 
     left: 50%; width: 100vw; height: 100vw;
     margin-left: -50vw; border-radius: 50%; transition: transform 0.1s linear;
@@ -302,7 +306,7 @@ footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255, 255,
 
 
 /* =========================================
-   CINEMATIC CARD STACK (Kunden-Galerie 2:3 FIX)
+   CINEMATIC CARD STACK (Kunden-Galerie)
    ========================================= */
 .client-hero {
     padding: 160px 20px 80px 20px;
@@ -369,7 +373,7 @@ footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255, 255,
 }
 
 .card-stack-container .card-stack-item:last-child {
-    margin-bottom: 10vh;
+    margin-bottom: 50vh;
 }
 
 .card-stack-item img {
@@ -387,7 +391,10 @@ footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255, 255,
 
 .download-cta-section {
     max-width: 800px;
-    margin: 0 auto 100px auto;
+
+    /* FIX: -40vh zieht den Block hoch in die leere "Spur" des letzten Bildes! */
+    margin: -40vh auto 100px auto;
+
     padding: 60px 30px;
     text-align: center;
     background: rgba(17, 17, 17, 0.7);
@@ -396,6 +403,10 @@ footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255, 255,
     border-radius: 16px;
     border: 1px solid rgba(255, 255, 255, 0.05);
     box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+
+    /* Zieht die Box in den Vordergrund, falls sie das letzte Bild leicht überlappt */
+    position: relative;
+    z-index: 20;
 }
 
 
@@ -473,17 +484,14 @@ footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255, 255,
     nav ul { gap: 20px; }
 
     /* FIX: Auch hier auf dem Handy extrem nach oben gezogen */
-    .hero { padding: 100px 20px 0px 20px !important; }
+    .hero { padding: 110px 20px 0px 20px !important; }
     .hero h1 { font-size: 2.2rem; }
     .hero p { font-size: 1rem; margin-bottom: 10px; }
 
-    /* Zieht das Rad näher an den Button heran */
     .text-glow-pulse { margin-bottom: 25px !important; }
 
     /* === Horizontal Swipe Carousel fürs Handy === */
     .wheel-blur-overlay { display: none; }
-
-    /* FIX: Hier ist der Trick fürs Handy! Ein negativer margin-top zieht das Rad hoch */
     .wheel-section { height: auto; padding: 0 0 40px 0; margin: -20px 0 40px 0; overflow: hidden; position: relative; }
     .wheel-sticky { position: relative; height: auto; overflow: visible; background-color: transparent; }
 
@@ -502,13 +510,22 @@ footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255, 255,
         overflow-x: auto;
         scroll-snap-type: x mandatory;
 
-        /* HIER IST DER MAGISCHE ZENTRIER-FIX: */
-        padding: 0 calc(50vw - min(42.5vw, 160px));
+        /* DIE KUGELSICHERE ZENTRIERUNG FÜR HANDYS */
+        padding: 0 !important;
 
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
         scroll-behavior: smooth;
     }
+
+    /* Unsichtbare Blöcke zwingen das erste Bild exakt in die Mitte */
+    .wheel-container::before,
+    .wheel-container::after {
+        content: '';
+        display: block;
+        flex: 0 0 calc(50vw - min(42.5vw, 160px) - 15px);
+    }
+
     .wheel-container::-webkit-scrollbar { display: none; }
 
     .wheel-item {
@@ -645,7 +662,7 @@ footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255, 255,
     }
 
     .card-stack-item {
-        top: 18vh;
+        top: 18vh; /* FIX: Schützt die Karte davor, oben abgeschnitten zu werden */
         width: 100%;
         height: auto;
         aspect-ratio: 2 / 3;
@@ -656,7 +673,7 @@ footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255, 255,
     .download-cta-section {
         padding: 40px 25px !important;
         width: calc(100% - 40px) !important;
-        margin: 0 auto 60px auto !important;
+        margin: -40vh auto 60px auto !important;
     }
 
     .download-cta-section h3 {
