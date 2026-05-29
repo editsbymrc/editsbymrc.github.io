@@ -797,18 +797,22 @@ footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255, 255,
    ANIMIERTES SCHLOSS (Kunden-Login)
    ========================================= */
 .locked-heading {
+    /* WICHTIG: Erlaubt dem Text, sich zu stapeln, wenn es zu eng wird,
+       aber zwingt die Elemente in eine Zeile, solange genug Platz da ist */
     display: flex;
-    align-items: center;
+    flex-direction: row;
     justify-content: center;
-    gap: 15px; /* Abstand zwischen Schloss und Text */
+    align-items: center;
+    flex-wrap: nowrap; /* Verhindert das Umbrechen auf Teufel komm raus */
+    font-size: 1.8rem; /* Macht die Schrift auf dem Handy einen Tick kleiner */
+    padding: 0 10px;
 }
 
 .lock-icon {
-    width: 45px;
-    height: 45px;
-    color: #1259f3;
-    /* FIX: Neue Schwebe-Animation eingebunden */
-    animation: lockFloat 2.5s infinite alternate ease-in-out;
+    width: 30px !important; /* Etwas kleineres Schloss auf dem Handy */
+    height: 30px !important;
+    flex-shrink: 0; /* Verhindert, dass das Schloss gestaucht wird */
+    margin-left: 10px;
 }
 
 /* Die neue, fließende Auf- und Ab-Bewegung */
